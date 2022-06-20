@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+button {
+  outline: none;
+  border: 1px solid black;
+  background: none;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+  border: 1px solid black;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}

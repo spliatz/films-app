@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Header from './components/Header/Header';
+import FilmList from './components/Films-List/Film-List';
+import Filter from './components/Filter/Filter';
+import { Container, Grid } from '@mui/material';
+import * as Const from './const';
 import './index.scss';
+import { Film } from './types';
 
 const App = () => {
+  const [films, setFilms] = useState<Film[]>(Const.initialFilms);
+
   return (
     <>
-      <p style={{fontSize: "4rem", color: 'red'}}>It is</p>
-      <p style={{fontSize: "4rem", color: 'green'}}>React App</p>
+      <Header />
+
+      <div className="main">
+        <Filter />
+
+        <FilmList films={films} setFilms={setFilms} />
+      </div>
     </>
   );
 };

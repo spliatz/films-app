@@ -1,0 +1,34 @@
+.header-nav {
+  height: 60px;
+  background: #1565c0;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: inherit;
+    width: 100%;
+    padding: 0 15%;
+    font-family: Roboto, sans-serif;
+
+    a {
+      color: #ffffff;
+      font-size: 2rem;
+    }
+
+    button {
+      color: #ffffff;
+      font-size: 20px;
+      border: none;
+      background: rgb(40, 167, 69);
+      border-radius: 5px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+  }
+}

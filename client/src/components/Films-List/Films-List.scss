@@ -1,0 +1,9 @@
+.film-list-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: 100%;
+  padding: 0 50px;
+  align-self: flex-start;
+  justify-content: space-around;
+}

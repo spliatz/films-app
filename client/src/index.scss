@@ -4,20 +4,15 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 10px;
-}
-
 button {
   outline: none;
-  border: 1px solid black;
   background: none;
   cursor: pointer;
+  border: 1px solid black;
 }
 
 input {
   outline: none;
-  border: 1px solid black;
   background: none;
 }
 
@@ -28,5 +23,18 @@ a {
 }
 
 a:visited {
-  color: black;
+  color: inherit;
+}
+
+#root {
+  height: 100%;
+  position: relative;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 30px 40px;
 }

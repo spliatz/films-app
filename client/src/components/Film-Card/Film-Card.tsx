@@ -1,47 +1,27 @@
-import React, { SetStateAction } from 'react';
+import React, { useState } from 'react';
 import { Film } from '../../types';
 import './Film-Card.scss';
 
-interface Props extends Film {
-  setFilms: React.Dispatch<SetStateAction<Film[]>>;
-  id: number;
-}
+const FilmCard: React.FC<Film> = (props) => {
+  const [isFavourite, setFavourite] = useState(false);
+  const [isWatchLater, setWatchLater] = useState(false);
 
-const FilmCard: React.FC<Props> = ({
-  image,
-  name,
-  rate,
-  isFavourite,
-  isWatchLater,
-  setFilms,
-  id,
-}) => {
   const onFavouriteHandler = () => {
-    setFilms((prev) => [
-      ...prev.map((item, index) => {
-        if (index === id) item.isFavourite = !item.isFavourite;
-        return item;
-      }),
-    ]);
+    setFavourite((prevState) => !prevState);
   };
 
   const onWatchLaterHandler = () => {
-    setFilms((prev) => [
-      ...prev.map((item, index) => {
-        if (index === id) item.isWatchLater = !item.isWatchLater;
-        return item;
-      }),
-    ]);
+    setWatchLater((prevState) => !prevState);
   };
 
   return (
     <div className="film-card">
       <div className="card-image">
-        <img src={image} alt="no photo :(" />
+        <img src={`https://image.tmdb.org/t/p/w300${props.poster_path}`} alt="no photo :(" />
       </div>
       <div className="card-info">
         <div className="rate-and-buttons">
-          <p>{rate}</p>
+          <p>Rate: {props.vote_average}</p>
           <button className="star" onClick={onFavouriteHandler}>
             {(isFavourite && '⭐') || '☆'}
           </button>
@@ -56,7 +36,7 @@ const FilmCard: React.FC<Props> = ({
             />
           </button>
         </div>
-        <h3>{name}</h3>
+        <h3>{props.title}</h3>
         <div className="divide-line" />
         <a className="more-info" href="#">
           Подробнее

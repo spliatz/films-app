@@ -34,12 +34,11 @@
     align-items: flex-start;
 
     .rate-and-buttons {
-      margin-left: 10px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-around;
       align-items: center;
       text-align: center;
-      gap: 5px;
+      width: 100%;
       position: relative;
 
       p {
@@ -51,6 +50,8 @@
         height: 20px;
         width: 20px;
         border: none;
+        position: relative;
+        top: -4px;
 
         img {
           height: inherit;
@@ -63,7 +64,7 @@
         height: 20px;
         transform: scale(1.6);
         position: relative;
-        top: -2px;
+        top: -4px;
         border: none;
 
         img {

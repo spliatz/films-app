@@ -1,27 +1,33 @@
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import { Film } from '../../types';
 import FilmCard from '../Film-Card/Film-Card';
 import './Films-List.scss';
 
 interface Props {
   films: Film[];
-  setFilms: React.Dispatch<SetStateAction<Film[]>>;
 }
 
-const FilmList: React.FC<Props> = ({ films, setFilms }) => {
+const FilmList: React.FC<Props> = ({ films }) => {
   return (
     <div className="film-list-wrapper">
-      {films.map((item: Film, index: number) => {
+      {films.map((item, index) => {
         return (
           <FilmCard
             key={index}
-            image={item.image}
-            name={item.name}
-            rate={item.rate}
-            isFavourite={item.isFavourite}
-            isWatchLater={item.isWatchLater}
-            id={index}
-            setFilms={setFilms}
+            adult={item.adult}
+            backdrop_path={item.backdrop_path}
+            genre_ids={item.genre_ids}
+            id={item.id}
+            original_language={item.original_language}
+            original_title={item.original_title}
+            overview={item.overview}
+            popularity={item.popularity}
+            poster_path={item.poster_path}
+            release_date={item.release_date}
+            title={item.title}
+            video={item.video}
+            vote_average={item.vote_average}
+            vote_count={item.vote_count}
           />
         );
       })}

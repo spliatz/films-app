@@ -7,7 +7,19 @@ import SortedCheckboxList from './FilterSorted/SortedCheckboxList';
 
 const Filter = () => {
   return (
-    <Card sx={{ minWidth: 330, py: 3, px: 2, maxWidth: 380, height: '100%', width: '100%' }} className="filter">
+    <Card
+      sx={{
+        minWidth: 330,
+        py: 3,
+        px: 2,
+        maxWidth: 380,
+        height: '100%',
+        width: '100%',
+        alignSelf: 'flex-start',
+        position: 'sticky',
+        top: 0,
+      }}
+    >
       <Typography variant="h5" component="div">
         Filters:
       </Typography>

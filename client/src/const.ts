@@ -48,7 +48,7 @@ export const initialFilms = [
   },
 ];
 
-const dataTest = [
+export const data = [
   {
     adult: false,
     backdrop_path: '/qjGrUmKW78MCFG8PTLDBp67S27p.jpg',

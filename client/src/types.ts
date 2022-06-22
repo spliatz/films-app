@@ -1,16 +1,7 @@
 export interface ActionTest {
   type: string;
 }
-
 export interface Film {
-  image: string;
-  name: string;
-  rate: string;
-  isFavourite: boolean;
-  isWatchLater: boolean;
-}
-
-export interface FilmTest {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -22,7 +13,7 @@ export interface FilmTest {
   poster_path: string;
   release_date: string;
   title: string;
-  video: false;
+  video: boolean;
   vote_average: number;
   vote_count: number;
 }

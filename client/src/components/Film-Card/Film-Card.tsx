@@ -17,7 +17,7 @@ const FilmCard: React.FC<Film> = (props) => {
   return (
     <div className="film-card">
       <div className="card-image">
-        <img src={`https://image.tmdb.org/t/p/w300${props.poster_path}`} alt="no photo :(" />
+        <img src={`https://image.tmdb.org/t/p/w500${props.poster_path}`} alt="no photo :(" />
       </div>
       <div className="card-info">
         <div className="rate-and-buttons">

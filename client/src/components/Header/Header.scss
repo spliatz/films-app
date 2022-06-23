@@ -32,3 +32,15 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .header-nav {
+    position: fixed;
+    top: 0;
+    padding: 0;
+
+    .nav-wrapper {
+      padding: 0 15% 0 5%;
+    }
+  }
+}

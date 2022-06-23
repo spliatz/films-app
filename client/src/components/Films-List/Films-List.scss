@@ -7,3 +7,9 @@
   align-self: flex-start;
   justify-content: space-around;
 }
+
+@media (max-width: 600px) {
+  .film-list-wrapper {
+    padding: 0;
+  }
+}

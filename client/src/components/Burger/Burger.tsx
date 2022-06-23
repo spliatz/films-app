@@ -23,7 +23,7 @@ const Burger: React.FC<Props> = ({ isOpen, setOpen }) => {
           <div className={'stick stick-2 ' + animationClass} />
           <div className={'stick stick-3 ' + animationClass} />
         </button>
-        <Filter />;
+        <Filter />
       </>
     );
   }

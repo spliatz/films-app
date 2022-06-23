@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SortedSelect from './FilterSorted/SortedSelect';
 import SortedCheckboxList from './FilterSorted/SortedCheckboxList';
+import { ScreenContext } from '../../context/ScreenContext';
+import PageSwitcher from '../Pagination/PageSwitcher';
 
 const Filter = () => {
+  const { isMobile } = useContext(ScreenContext);
+
   return (
     <Card
       sx={{
-        minWidth: 330,
+        minWidth: 395,
         py: 3,
         px: 2,
-        maxWidth: 380,
+        maxWidth: 400,
+      }}
+      style={{
+        boxShadow: '0px 0px 21px 5px rgba(16, 32, 45, 0.2)',
         height: '100%',
         width: '100%',
         alignSelf: 'flex-start',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         position: 'sticky',
         top: 0,
       }}
@@ -28,6 +38,7 @@ const Filter = () => {
       </Button>
       <SortedSelect />
       <SortedCheckboxList />
+      {!isMobile && <PageSwitcher />}
     </Card>
   );
 };

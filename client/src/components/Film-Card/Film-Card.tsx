@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Film } from '../../types';
 import './Film-Card.scss';
 
-const FilmCard: React.FC<Film> = (props) => {
+interface Props {
+  props: Film;
+}
+
+const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
   const [isFavourite, setFavourite] = useState(false);
   const [isWatchLater, setWatchLater] = useState(false);
 
@@ -17,11 +21,11 @@ const FilmCard: React.FC<Film> = (props) => {
   return (
     <div className="film-card">
       <div className="card-image">
-        <img src={`https://image.tmdb.org/t/p/w500${props.poster_path}`} alt="no photo :(" />
+        <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="no photo :(" />
       </div>
       <div className="card-info">
         <div className="rate-and-buttons">
-          <p>Rate: {props.vote_average}</p>
+          <p>Rate: {vote_average}</p>
           <button className="star" onClick={onFavouriteHandler}>
             {(isFavourite && '⭐') || '☆'}
           </button>
@@ -36,7 +40,7 @@ const FilmCard: React.FC<Film> = (props) => {
             />
           </button>
         </div>
-        <h3>{props.title}</h3>
+        <h3>{title}</h3>
         <div className="divide-line" />
         <a className="more-info" href="#">
           Подробнее

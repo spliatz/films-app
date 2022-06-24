@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Film } from '../../types';
 import './Film-Card.scss';
 
-interface Props {
-  props: Film;
-}
-
-const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
+const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title }) => {
   const [isFavourite, setFavourite] = useState(false);
   const [isWatchLater, setWatchLater] = useState(false);
 

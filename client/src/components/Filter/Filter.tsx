@@ -6,9 +6,15 @@ import SortedSelect from './FilterSorted/SortedSelect';
 import SortedCheckboxList from './FilterSorted/SortedCheckboxList';
 import { ScreenContext } from '../../context/ScreenContext';
 import PageSwitcher from '../Pagination/PageSwitcher';
+import { FilterContext } from '../../context/FilterContext';
 
 const Filter = () => {
   const { isMobile } = useContext(ScreenContext);
+  const { reset } = useContext(FilterContext);
+
+  const resetHandler = () => {
+    reset();
+  };
 
   return (
     <Card
@@ -33,7 +39,7 @@ const Filter = () => {
       <Typography variant="h5" component="div">
         Filters:
       </Typography>
-      <Button color="primary" sx={{ width: '100%' }}>
+      <Button color="primary" sx={{ width: '100%' }} onClick={resetHandler}>
         Reset all filters
       </Button>
       <SortedSelect />

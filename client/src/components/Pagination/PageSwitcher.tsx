@@ -7,10 +7,12 @@ import { ScreenContext } from '../../context/ScreenContext';
 import './PageSwitcher.scss';
 
 const PageSwitcher = () => {
-  const { page, switchPage } = useContext(PaginationContext);
+  const { page, switchPage, pageCount } = useContext(PaginationContext);
   const { isMobile } = useContext(ScreenContext);
 
-  const pageCount = 24;
+  const onSwitchPageHandler = (e: React.ChangeEvent<unknown>, page: number) => {
+    switchPage(page);
+  };
 
   return (
     <FormGroup
@@ -28,7 +30,7 @@ const PageSwitcher = () => {
         count={pageCount}
         size={isMobile ? 'large' : 'medium'}
         page={page}
-        onChange={switchPage}
+        onChange={onSwitchPageHandler}
       />
 
       <Typography sx={{ fontSize: '18px' }}>

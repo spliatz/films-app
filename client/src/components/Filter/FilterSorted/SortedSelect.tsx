@@ -1,29 +1,40 @@
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import React from 'react';
+import { FilterContext } from '../../../context/FilterContext';
+import { releaseYears } from '../../../const';
 
-const releaseYears = [
-  {
-    value: 2022,
-    label: 2022,
-  },
-  {
-    value: 2021,
-    label: 2021,
-  },
-];
 function SortedSelect() {
   const [sortedValue, setSortedValue] = useState('');
   const [releaseYear, setReleaseYear] = useState('');
+  const { sortByPopularity, sortByYear, filters } = useContext(FilterContext);
+
   const handleChangeSorted = (event: any) => {
-    console.log(event.target.value);
-    setSortedValue(event.target.value as string);
+    const value = event.target.value as string;
+    if (!!value) {
+      sortByPopularity(value);
+      return;
+    }
+    sortByPopularity('PopularityDescending');
   };
   const handleChangeYear = (event: any) => {
-    setReleaseYear(event.target.value as string);
+    const value = event.target.value as string;
+    if (!!value) {
+      sortByYear(value);
+      return;
+    }
+    sortByYear('2020');
   };
+
+  useEffect(() => {
+    const sortedByPop = filters.sortedByPopularity;
+    !!sortedByPop ? setSortedValue(sortedByPop) : setSortedValue('PopularityDescending');
+
+    const sortedByYear = filters.sortedByYear;
+    !!sortedByYear ? setReleaseYear(sortedByYear) : setReleaseYear('2020');
+  }, [filters]);
 
   return (
     <>
@@ -37,11 +48,10 @@ function SortedSelect() {
           defaultValue="choose"
           id="select-sorted"
         >
-          <MenuItem value={''}>
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={'descent'}>descending sort</MenuItem>
-          <MenuItem value={'growth'}>sort by growth</MenuItem>
+          <MenuItem value={'PopularityDescending'}>Популярные по убыванию</MenuItem>
+          <MenuItem value={'PopularityAscending'}>Популярные по возрастанию</MenuItem>
+          <MenuItem value={'RateDescending'}>Рейтинг по убыванию</MenuItem>
+          <MenuItem value={'RateAscending'}>Рейтинг по возрастанию</MenuItem>
         </TextField>
       </FormControl>
       <FormControl sx={{ p: 1, minWidth: '100%' }}>
@@ -53,9 +63,6 @@ function SortedSelect() {
           onChange={handleChangeYear}
           size="small"
         >
-          <MenuItem value={''}>
-            <em>None</em>
-          </MenuItem>
           {releaseYears.map((year) => (
             <MenuItem key={year.value} value={year.value}>
               {year.label}

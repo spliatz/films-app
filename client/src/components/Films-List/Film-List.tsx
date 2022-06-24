@@ -16,6 +16,9 @@ const FilmList: React.FC<Props> = ({ films }) => {
   const { isMobile } = useContext(ScreenContext);
   const { filters } = useContext(FilterContext);
   const sortedFilms = films
+    .filter((item) => {
+      return item.release_date.split('-')[0] === filters.sortedByYear;
+    })
     .sort((a, b) => {
       if (filters.sortedByPopularity === 'PopularityAscending') {
         return a.popularity - b.popularity;
@@ -27,9 +30,6 @@ const FilmList: React.FC<Props> = ({ films }) => {
         return a.vote_average - b.vote_average;
       }
       return b.popularity - a.popularity;
-    })
-    .filter((item) => {
-      return item.release_date.split('-')[0] === filters.sortedByYear;
     });
 
   const filmsOnPage = sortedFilms.slice(10 * page - 10, 10 * page);

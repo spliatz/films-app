@@ -1,10 +1,10 @@
+import React, { useContext, useEffect, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import { useContext, useEffect, useState } from 'react';
-import React from 'react';
 import { FilterContext } from '../../../context/FilterContext';
 import { releaseYears } from '../../../const';
+import { FilterPopularity } from '../../../types';
 
 function SortedSelect() {
   const [sortedValue, setSortedValue] = useState('');
@@ -13,24 +13,19 @@ function SortedSelect() {
 
   const handleChangeSorted = (event: any) => {
     const value = event.target.value as string;
-    if (!!value) {
-      sortByPopularity(value);
-      return;
-    }
-    sortByPopularity('PopularityDescending');
+    sortByPopularity(value);
   };
+
   const handleChangeYear = (event: any) => {
     const value = event.target.value as string;
-    if (!!value) {
-      sortByYear(value);
-      return;
-    }
-    sortByYear('2020');
+    sortByYear(value);
   };
 
   useEffect(() => {
     const sortedByPop = filters.sortedByPopularity;
-    !!sortedByPop ? setSortedValue(sortedByPop) : setSortedValue('PopularityDescending');
+    !!sortedByPop
+      ? setSortedValue(sortedByPop)
+      : setSortedValue(FilterPopularity.PopularityDescending);
 
     const sortedByYear = filters.sortedByYear;
     !!sortedByYear ? setReleaseYear(sortedByYear) : setReleaseYear('2020');
@@ -48,10 +43,12 @@ function SortedSelect() {
           defaultValue="choose"
           id="select-sorted"
         >
-          <MenuItem value={'PopularityDescending'}>Популярные по убыванию</MenuItem>
-          <MenuItem value={'PopularityAscending'}>Популярные по возрастанию</MenuItem>
-          <MenuItem value={'RateDescending'}>Рейтинг по убыванию</MenuItem>
-          <MenuItem value={'RateAscending'}>Рейтинг по возрастанию</MenuItem>
+          <MenuItem value={FilterPopularity.PopularityDescending}>Популярные по убыванию</MenuItem>
+          <MenuItem value={FilterPopularity.PopularityAscending}>
+            Популярные по возрастанию
+          </MenuItem>
+          <MenuItem value={FilterPopularity.RateDescending}>Рейтинг по убыванию</MenuItem>
+          <MenuItem value={FilterPopularity.RateAscending}>Рейтинг по возрастанию</MenuItem>
         </TextField>
       </FormControl>
       <FormControl sx={{ p: 1, minWidth: '100%' }}>

@@ -1,6 +1,7 @@
 export interface ActionTest {
   type: string;
 }
+
 export interface Film {
   adult: boolean;
   backdrop_path: string | null;
@@ -21,4 +22,11 @@ export interface Film {
 export interface Filters {
   sortedByPopularity: string;
   sortedByYear: string;
+}
+
+export enum FilterPopularity {
+  PopularityAscending = 'PopularityAscending',
+  PopularityDescending = 'PopularityDescending',
+  RateAscending = 'RateAscending',
+  RateDescending = 'RateDescending',
 }

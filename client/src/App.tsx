@@ -3,7 +3,7 @@ import Header from './components/Header/Header';
 import FilmList from './components/Films-List/Film-List';
 import Filter from './components/Filter/Filter';
 import { Data } from './const';
-import { Film, Filters } from './types';
+import { Filters, FilterPopularity } from './types';
 import { ScreenContext } from './context/ScreenContext';
 import { PaginationContext } from './context/PaginationContext';
 import { FilterContext } from './context/FilterContext';
@@ -12,13 +12,12 @@ import Burger from './components/Burger/Burger';
 import './index.scss';
 
 const App = () => {
-  const [films, setFilms] = useState<Film[]>(Data);
   const { isMobile, changeWidth } = useScreen(document.body.clientWidth);
   const [isBurgerOpen, setBurgerOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [filters, setFilters] = useState<Filters>({
-    sortedByPopularity: 'PopularityDescending',
+    sortedByPopularity: FilterPopularity.PopularityDescending,
     sortedByYear: '2020',
   });
 
@@ -44,7 +43,7 @@ const App = () => {
 
   const resetFilters = () => {
     const object = filters;
-    object.sortedByPopularity = 'PopularityDescending';
+    object.sortedByPopularity = FilterPopularity.PopularityDescending;
     object.sortedByYear = '2020';
     setFilters({ ...object });
   };
@@ -85,7 +84,7 @@ const App = () => {
           <div className={isMobile ? 'main mobile' : 'main'}>
             {(!isMobile && <Filter />) || <Burger isOpen={isBurgerOpen} setOpen={setBurgerOpen} />}
 
-            {!isBurgerOpen && <FilmList films={films} />}
+            {!isBurgerOpen && <FilmList films={Data} />}
           </div>
         </PaginationContext.Provider>
       </FilterContext.Provider>

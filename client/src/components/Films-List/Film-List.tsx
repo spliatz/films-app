@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Film } from '../../types';
+import { FilterPopularity } from '../../types';
 import FilmCard from '../Film-Card/Film-Card';
 import { PaginationContext } from '../../context/PaginationContext';
 import './Films-List.scss';
@@ -20,13 +21,13 @@ const FilmList: React.FC<Props> = ({ films }) => {
       return item.release_date.split('-')[0] === filters.sortedByYear;
     })
     .sort((a, b) => {
-      if (filters.sortedByPopularity === 'PopularityAscending') {
+      if (filters.sortedByPopularity === FilterPopularity.PopularityAscending) {
         return a.popularity - b.popularity;
       }
-      if (filters.sortedByPopularity === 'RateDescending') {
+      if (filters.sortedByPopularity === FilterPopularity.RateDescending) {
         return b.vote_average - a.vote_average;
       }
-      if (filters.sortedByPopularity === 'RateAscending') {
+      if (filters.sortedByPopularity === FilterPopularity.RateAscending) {
         return a.vote_average - b.vote_average;
       }
       return b.popularity - a.popularity;

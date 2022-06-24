@@ -1,8 +1,9 @@
 import { createContext } from 'react';
 import { Filters } from '../types';
+import { FilterPopularity } from '../types';
 
 const filters: Filters = {
-  sortedByPopularity: 'PopularityDescending',
+  sortedByPopularity: FilterPopularity.PopularityDescending,
   sortedByYear: '2020',
 };
 

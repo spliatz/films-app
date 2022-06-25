@@ -6,7 +6,7 @@ function setPageCount(pages: number) {}
 
 export const PaginationContext = createContext({
   page: 1,
-  switchPage: pooh,
+  setPage: pooh,
   pageCount: 1,
   setPageCount: setPageCount,
 });

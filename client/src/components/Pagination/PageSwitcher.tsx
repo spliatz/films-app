@@ -7,11 +7,11 @@ import { ScreenContext } from '../../context/ScreenContext';
 import './PageSwitcher.scss';
 
 const PageSwitcher = () => {
-  const { page, switchPage, pageCount } = useContext(PaginationContext);
+  const { page, setPage, pageCount } = useContext(PaginationContext);
   const { isMobile } = useContext(ScreenContext);
 
   const onSwitchPageHandler = (e: React.ChangeEvent<unknown>, page: number) => {
-    switchPage(page);
+    setPage(page);
   };
 
   return (
@@ -34,7 +34,7 @@ const PageSwitcher = () => {
       />
 
       <Typography sx={{ fontSize: '18px' }}>
-        {page} of {pageCount}
+        {(pageCount !== 0 && page + ' of ' + pageCount) || 'страницы отсутствуют'}
       </Typography>
     </FormGroup>
   );

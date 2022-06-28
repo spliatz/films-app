@@ -21,13 +21,9 @@ const Header = () => {
     <nav className="header-nav">
       <div className="nav-wrapper">
         <a href={'/home'}>Home</a>
-        {isOpen ? (
-          <AuthorizationPopup />
-        ) : (
           <button className="nav-btn" onClick={logHandler}>
             {isAuth ? 'Logout' : 'Login'}
           </button>
-        )}
       </div>
     </nav>
   );

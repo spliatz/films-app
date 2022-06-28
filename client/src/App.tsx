@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useRoutes } from './routes';
 import { AuthPopupContext } from './context/AuthPopup';
 import './index.scss';
+import AuthorizationPopup from './components/autorization-popup/authorization-popup';
 
 const App = () => {
   const { isMobile, changeWidth } = useScreen(document.body.clientWidth);
@@ -48,8 +49,9 @@ const App = () => {
             close: onCloseLoginPopupHandler,
           }}
         >
-          <Header />
-          {routes}
+          <Header/>
+            {isLoginPopupOpen && <AuthorizationPopup />}
+            {routes}
         </AuthPopupContext.Provider>
       </ScreenContext.Provider>
     </BrowserRouter>

@@ -37,17 +37,21 @@ const AuthorizationPopup = () => {
   };
 
   return (
-    <div className="auth-popup">
-      <div className="auth-header">
-        <h2>Authorization</h2>
-        <button onClick={onClose}>X</button>
-      </div>
-      <div className="form">
-        <input name="email" type="email" value={form.email} onChange={changeHandler} />
-        <input name="password" type="password" value={form.password} onChange={changeHandler} />
-        <button className="form-button" onClick={onLoginHandler}>
-          login
-        </button>
+    <div className="auth-popup" onClick={onClose}>
+      <div className="auth__content" onClick={e => e.stopPropagation()}>
+        <div className="auth-header">
+          <h2>Authorization</h2>
+          <button onClick={onClose}>X</button>
+        </div>
+        <div className="form">
+          <label htmlFor="email">Email:</label>
+          <input name="email" type="email" value={form.email} onChange={changeHandler} />
+          <label htmlFor="password">Password:</label>
+          <input name="password" type="password" value={form.password} onChange={changeHandler} />
+          <button className="form-button" onClick={onLoginHandler}>
+            login
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,8 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
     mode: mode,
     devServer: {
-        port: 3031
+        port: 3031,
+        historyApiFallback: true,
     },
     entry: {
         scripts: './src/index.tsx',
@@ -20,6 +21,7 @@ module.exports = {
     output: {
         assetModuleFilename: "assets/[hash][ext][query]",
         clean: true,
+        publicPath: '/',
     },
     devtool: 'source-map',
     optimization: {

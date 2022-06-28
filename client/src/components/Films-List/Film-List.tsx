@@ -3,10 +3,10 @@ import { Film, Filters } from '../../types';
 import { FilterPopularity } from '../../types';
 import FilmCard from '../Film-Card/Film-Card';
 import { PaginationContext } from '../../context/PaginationContext';
-import './Films-List.scss';
 import PageSwitcher from '../Pagination/PageSwitcher';
 import { ScreenContext } from '../../context/ScreenContext';
 import { FilterContext } from '../../context/FilterContext';
+import './Films-List.scss';
 
 interface Props {
   films: Film[];
@@ -18,6 +18,7 @@ const FilmList: React.FC<Props> = ({ films }) => {
   const { filters } = useContext(FilterContext);
   const sortedFilms = sortArray(filterArray(films, filters), filters);
   const filmsOnPage = sortedFilms.slice(10 * page - 10, 10 * page);
+
 
   useEffect(() => {
     setPageCount(Math.ceil(sortedFilms.length / 10));

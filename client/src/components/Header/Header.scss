@@ -1,10 +1,10 @@
 .header-nav {
   height: 60px;
-  background: #1565c0;
-  position: sticky;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
   width: 100%;
-  top: 0;
   z-index: 10;
+
 
   .nav-wrapper {
     display: flex;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Film } from '../../types';
 import './Film-Card.scss';
 
-const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title }) => {
+const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
   const [isFavourite, setFavourite] = useState(false);
   const [isWatchLater, setWatchLater] = useState(false);
 
@@ -38,7 +38,7 @@ const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title }) => {
         </div>
         <h3>{title}</h3>
         <div className="divide-line" />
-        <a className="more-info" href="#">
+        <a className="more-info" href={`/detail/${id}`} target={'_blank'}>
           Подробнее
         </a>
       </div>

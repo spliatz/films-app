@@ -325,7 +325,7 @@ export const Data: Film[] = [
     vote_count: 409,
   },
   {
-    adult: false,
+    adult: true,
     backdrop_path: '/jiqD14fg7UTZOT6qgvzTmfRYpWI.jpg',
     genre_ids: [28, 80],
     id: 495764,
@@ -393,7 +393,7 @@ export const Data: Film[] = [
     vote_count: 136,
   },
   {
-    adult: false,
+    adult: true,
     backdrop_path: '/jiqD14fg7UTZOT6qgvzTmfRYpWI.jpg',
     genre_ids: [28, 80],
     id: 495764,

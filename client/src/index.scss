@@ -26,6 +26,10 @@ a:visited {
   color: inherit;
 }
 
+body {
+  height: 100%;
+}
+
 #root {
   height: 100%;
   position: relative;
@@ -37,6 +41,7 @@ a:visited {
   height: 100%;
   padding: 30px 40px;
   position: relative;
+  top: 40px;
 }
 
 .mobile {

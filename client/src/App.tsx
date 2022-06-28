@@ -1,15 +1,21 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import { ScreenContext } from './context/ScreenContext';
 import { useScreen } from './hooks/screen.hook';
+import { useAuth } from './hooks/auth.hook';
 import { BrowserRouter } from 'react-router-dom';
 import { useRoutes } from './routes';
+import { AuthPopupContext } from './context/AuthPopup';
 import './index.scss';
 
 const App = () => {
   const { isMobile, changeWidth } = useScreen(document.body.clientWidth);
 
-  const routes = useRoutes();
+  const { isAuth } = useAuth();
+
+  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+
+  const routes = useRoutes(isAuth);
 
   useLayoutEffect(() => {
     function updateSize() {
@@ -20,6 +26,14 @@ const App = () => {
     return () => window.removeEventListener('resize', updateSize);
   });
 
+  const onOpenLoginPopupHandler = () => {
+    setLoginPopupOpen(true);
+  };
+
+  const onCloseLoginPopupHandler = () => {
+    setLoginPopupOpen(false);
+  };
+
   return (
     <BrowserRouter>
       <ScreenContext.Provider
@@ -27,8 +41,16 @@ const App = () => {
           isMobile: isMobile,
         }}
       >
-        <Header />
-        {routes}
+        <AuthPopupContext.Provider
+          value={{
+            isOpen: isLoginPopupOpen,
+            open: onOpenLoginPopupHandler,
+            close: onCloseLoginPopupHandler,
+          }}
+        >
+          <Header />
+          {routes}
+        </AuthPopupContext.Provider>
       </ScreenContext.Provider>
     </BrowserRouter>
   );

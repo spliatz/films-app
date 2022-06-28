@@ -22,7 +22,7 @@ const DetailPage = () => {
     if (film) {
       document.title = film.title || film.original_title;
     }
-  }, [film])
+  }, [film]);
 
   return <>{film && <DetailFIlmCard {...film} />}</>;
 };

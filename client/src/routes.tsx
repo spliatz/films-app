@@ -3,7 +3,7 @@ import { Route, Navigate, Routes as Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import DetailPage from './pages/DetailPage';
 
-export const useRoutes = () => {
+export const useRoutes = (isAuth: boolean) => {
   return (
     <Switch>
       <Route path="/home" element={<MainPage />} />

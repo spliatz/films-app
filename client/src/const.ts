@@ -4179,4 +4179,14 @@ export const dataCheckBox = [
     name: 'вестерн',
     checked: false,
   },
+  {
+    id: 0,
+    name: 'favorite',
+    checked: false,
+  },
+  {
+    id: 1,
+    name: 'watch later',
+    checked: false,
+  },
 ];

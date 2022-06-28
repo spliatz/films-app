@@ -1,4 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { test } from './test';
+import { Auth } from './auth.reducer';
+import { Favourites } from './favourite.reducer';
+import { WatchLater } from './watchLater.reducer';
 
-export default combineReducers({ test });
+export default combineReducers({ Auth, Favourites, WatchLater });

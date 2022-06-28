@@ -1,18 +1,50 @@
-import React, { useState } from 'react';
-import { Film } from '../../types';
+import React, { useContext, useEffect, useState } from 'react';
+import { Film, IStore } from '../../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionFavouriteAdd, ActionFavouriteRemove } from '../../reducers/favourite.reducer';
+import { ActionWatchLaterAdd, ActionWatchLaterRemove } from '../../reducers/watchLater.reducer';
+import { useAuth } from '../../hooks/auth.hook';
+import { AuthPopupContext } from '../../context/AuthPopup';
 import './Film-Card.scss';
 
 const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
   const [isFavourite, setFavourite] = useState(false);
   const [isWatchLater, setWatchLater] = useState(false);
 
+  const { isAuth } = useAuth();
+  const { open } = useContext(AuthPopupContext);
+
+  const favouriteFilms = useSelector((state: IStore) => state.Favourites);
+  const watchLaterFilms = useSelector((state: IStore) => state.WatchLater);
+  const dispatch = useDispatch();
+
   const onFavouriteHandler = () => {
-    setFavourite((prevState) => !prevState);
+    if (!isAuth) return open();
+    if (favouriteFilms.includes(id)) {
+      return dispatch(ActionFavouriteRemove(id));
+    }
+
+    dispatch(ActionFavouriteAdd(id));
   };
 
   const onWatchLaterHandler = () => {
-    setWatchLater((prevState) => !prevState);
+    if (!isAuth) return open();
+    if (watchLaterFilms.includes(id)) {
+      return dispatch(ActionWatchLaterRemove(id));
+    }
+
+    dispatch(ActionWatchLaterAdd(id));
   };
+
+  useEffect(() => {
+    if (!isAuth) {
+      setFavourite(false);
+      setWatchLater(false);
+      return;
+    }
+    setFavourite(favouriteFilms.includes(id));
+    setWatchLater(watchLaterFilms.includes(id));
+  }, [favouriteFilms, watchLaterFilms, isAuth]);
 
   return (
     <div className="film-card">

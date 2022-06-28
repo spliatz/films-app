@@ -1,5 +1,20 @@
-export interface ActionTest {
+export interface ActionAuth {
   type: string;
+}
+
+export interface ActionFavoriteAndWatchLater {
+  type: string;
+  payload: number;
+}
+
+export interface IAuthReducer {
+  isAuth: boolean;
+}
+
+export interface IStore {
+  Auth: IAuthReducer;
+  Favourites: number[];
+  WatchLater: number[];
 }
 
 export interface Film {

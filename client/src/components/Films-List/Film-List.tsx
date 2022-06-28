@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { Film, Filters } from '../../types';
-import { FilterPopularity } from '../../types';
+import { Film, Filters, IStore, FilterPopularity } from '../../types';
+
 import FilmCard from '../Film-Card/Film-Card';
-import { PaginationContext } from '../../context/PaginationContext';
 import PageSwitcher from '../Pagination/PageSwitcher';
+
+import { PaginationContext } from '../../context/PaginationContext';
 import { ScreenContext } from '../../context/ScreenContext';
 import { FilterContext } from '../../context/FilterContext';
+
+import { useSelector } from 'react-redux';
 import './Films-List.scss';
 
 interface Props {
@@ -16,9 +19,12 @@ const FilmList: React.FC<Props> = ({ films }) => {
   const { page, setPageCount, setPage } = useContext(PaginationContext);
   const { isMobile } = useContext(ScreenContext);
   const { filters } = useContext(FilterContext);
-  const sortedFilms = sortArray(filterArray(films, filters), filters);
-  const filmsOnPage = sortedFilms.slice(10 * page - 10, 10 * page);
 
+  const favourites = useSelector((state: IStore) => state.Favourites);
+  const watchLater = useSelector((state: IStore) => state.WatchLater);
+
+  const sortedFilms = sortArray(filterArray(films, filters, favourites, watchLater), filters);
+  const filmsOnPage = sortedFilms.slice(10 * page - 10, 10 * page);
 
   useEffect(() => {
     setPageCount(Math.ceil(sortedFilms.length / 10));
@@ -39,20 +45,34 @@ const FilmList: React.FC<Props> = ({ films }) => {
   );
 };
 
-function filterArray(array: Film[], options: Filters) {
+function filterArray(array: Film[], options: Filters, favourites: number[], watchLater: number[]) {
+  const favouriteID = 0;
+  const watchLaterID = 1;
+
+  let checked = options.sortedCheckbox // массив выбранных фильтров
+    .filter((item) => {
+      return item.checked;
+    })
+    .map((item) => {
+      return item.id;
+    });
+
+  if (checked.includes(favouriteID) && checked.includes(watchLaterID)) {
+    array = array.filter((item) => favourites.includes(item.id) || watchLater.includes(item.id));
+  } else if (checked.includes(favouriteID)) {
+    array = array.filter((item) => favourites.includes(item.id));
+  } else if (checked.includes(watchLaterID)) {
+    array = array.filter((item) => watchLater.includes(item.id));
+  }
+
+  checked = checked.filter((item) => item !== favouriteID && item !== watchLaterID); /* удалить
+  фильтры favourite и watchLater */
+
   return array
     .filter((item) => {
       return item.release_date.split('-')[0] === options.sortedByYear;
     })
     .filter((item) => {
-      const checked = options.sortedCheckbox
-        .filter((item) => {
-          return item.checked;
-        })
-        .map((item) => {
-          return item.id;
-        });
-
       if (checked.length > 0) {
         const matches = checked.map((id) => {
           return item.genre_ids.includes(id);

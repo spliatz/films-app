@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Film } from '../../types';
 import './Detail-FIlm-Card.scss';
 import { ScreenContext } from '../../context/ScreenContext';
+import { Table } from '@mui/material';
 
 interface Props {
   film: Film;
@@ -14,44 +15,46 @@ const DetailFIlmCard: React.FC<Film> = ({
   overview,
   poster_path,
   adult,
+  vote_average,
+  release_date,
+  original_language,
 }) => {
-  const { isMobile } = useContext(ScreenContext);
-
-  if (isMobile) {
-    return (
-      <div className={'detail-film-card'}>
+  return (
+    <div className="detail__wrapper">
+      <div className="detail__content">
         <div
-          className="titles"
+          className="top-block"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/w500${poster_path})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${backdrop_path})`,
           }}
         >
-          <div className="title-text">
-            <h1>{original_title}</h1>
-            {original_title !== title && <h1>{title}</h1>}
-            {adult && <h1 className={'adult'}>16+</h1>}
+          <div className="top__content">
+            <div className="top__poster">
+              <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="no bg" />
+            </div>
+            <div className="main-info">
+              <h1>{title}</h1>
+              <p>Rate: {vote_average}</p>
+              <p>{overview}</p>
+            </div>
           </div>
         </div>
-        <div className="paragraph-container">
-          {!!overview && <p className="film-description">{overview}</p>}
+        <div className="other-info">
+          <h2>Details</h2>
+          <p>
+            <b>Status:</b> Released
+          </p>
+          <p>
+            <b>Original title:</b> {original_title}
+          </p>
+          <p>
+            <b>Release date:</b> {release_date}
+          </p>
+          <p>
+            <b>Original language:</b> {original_language}
+          </p>
         </div>
       </div>
-    );
-  }
-
-  return (
-    <div
-      className={'detail-film-card'}
-      style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${backdrop_path})`,
-      }}
-    >
-      <div className="titles">
-        <h1>{original_title}</h1>
-        {original_title !== title && <h1>{title}</h1>}
-        {adult && <h1 className={'adult'}>16+</h1>}
-      </div>
-      {!!overview && <p className="film-description">{overview}</p>}
     </div>
   );
 };

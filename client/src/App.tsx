@@ -49,9 +49,9 @@ const App = () => {
             close: onCloseLoginPopupHandler,
           }}
         >
-          <Header/>
-            {isLoginPopupOpen && <AuthorizationPopup />}
-            {routes}
+          <Header />
+          {isLoginPopupOpen && <AuthorizationPopup />}
+          {routes}
         </AuthPopupContext.Provider>
       </ScreenContext.Provider>
     </BrowserRouter>

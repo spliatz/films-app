@@ -38,7 +38,7 @@ const AuthorizationPopup = () => {
 
   return (
     <div className="auth-popup" onClick={onClose}>
-      <div className="auth__content" onClick={e => e.stopPropagation()}>
+      <div className="auth__content" onClick={(e) => e.stopPropagation()}>
         <div className="auth-header">
           <h2>Authorization</h2>
           <button onClick={onClose}>X</button>

@@ -14,7 +14,7 @@ import { AuthPopupContext } from '../context/AuthPopup';
 
 const MainPage = () => {
   const { isMobile } = useContext(ScreenContext);
-  const { isOpen } = useContext(AuthPopupContext)
+  const { isOpen } = useContext(AuthPopupContext);
   const [isBurgerOpen, setBurgerOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -83,7 +83,10 @@ const MainPage = () => {
           setPageCount: changePageCount,
         }}
       >
-        <div className={isMobile ? 'main mobile' : 'main'} style={{userSelect: isOpen ? 'none' : 'inherit'}}>
+        <div
+          className={isMobile ? 'main mobile' : 'main'}
+          style={{ userSelect: isOpen ? 'none' : 'inherit' }}
+        >
           {(!isMobile && <Filter />) || <Burger isOpen={isBurgerOpen} setOpen={setBurgerOpen} />}
 
           {!isBurgerOpen && <FilmList films={Data} />}

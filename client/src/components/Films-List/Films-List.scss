@@ -9,9 +9,11 @@
   justify-content: flex-start;
 
   .films-empty-error {
-    margin: 30% auto;
+    margin: 0 auto;
     font-size: 5rem;
     font-family: 'SF Pro Display', sans-serif;
+    position: fixed;
+    top: 20rem;
   }
 }
 

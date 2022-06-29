@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { FilterContext } from '../../../context/FilterContext';
-import { releaseYears } from '../../../const';
+import { releaseYears, defaultRelease } from '../../../const';
 import { FilterPopularity, UserFilter } from '../../../types';
 import { useAuth } from '../../../hooks/auth.hook';
 
@@ -36,7 +36,7 @@ function SortedSelect() {
       : setSortedValue(FilterPopularity.PopularityDescending);
 
     const sortedByYear = filters.sortedByYear;
-    !!sortedByYear ? setReleaseYear(sortedByYear) : setReleaseYear('2020');
+    !!sortedByYear ? setReleaseYear(sortedByYear) : setReleaseYear(defaultRelease);
 
     const sortedByUserFilter = filters.userFilters;
     !!sortedByUserFilter ? setUserFilter(sortedByUserFilter) : setUserFilter(UserFilter.DEFAULT);
@@ -90,7 +90,7 @@ function SortedSelect() {
           onChange={handleChangeYear}
           size="small"
         >
-          <MenuItem value="NONE">None</MenuItem>
+          <MenuItem value={defaultRelease}>All</MenuItem>
           {releaseYears.map((year) => (
             <MenuItem key={year.value} value={year.value}>
               {year.label}

@@ -11,7 +11,7 @@ import { PaginationContext } from '../context/PaginationContext';
 import { ScreenContext } from '../context/ScreenContext';
 
 import { FilterPopularity, Filters, UserFilter } from '../types';
-import { Data, dataCheckBox } from '../const';
+import { Data, dataCheckBox, defaultRelease } from '../const';
 import { AuthPopupContext } from '../context/AuthPopup';
 
 const MainPage = () => {
@@ -25,7 +25,7 @@ const MainPage = () => {
 
   const [filters, setFilters] = useState<Filters>({
     sortedByPopularity: FilterPopularity.PopularityDescending,
-    sortedByYear: '2020',
+    sortedByYear: defaultRelease,
     sortedCheckbox: dataCheckBox,
     userFilters: UserFilter.DEFAULT,
   });
@@ -62,7 +62,7 @@ const MainPage = () => {
     const object = filters;
     object.userFilters = UserFilter.DEFAULT;
     object.sortedByPopularity = FilterPopularity.PopularityDescending;
-    object.sortedByYear = 'NONE';
+    object.sortedByYear = defaultRelease;
     object.sortedCheckbox.map((item) => (item.checked = false));
     setFilters({ ...object });
   };
@@ -86,7 +86,7 @@ const MainPage = () => {
     //reset all filters without userFilters
     const object = filters;
     object.sortedByPopularity = FilterPopularity.PopularityDescending;
-    object.sortedByYear = 'NONE';
+    object.sortedByYear = defaultRelease;
     object.sortedCheckbox.map((item) => (item.checked = false));
     setFilters({ ...object });
   }, [filters.userFilters]);

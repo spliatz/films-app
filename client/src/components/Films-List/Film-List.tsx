@@ -6,6 +6,8 @@ import { useAuth } from '../../hooks/auth.hook';
 import FilmCard from '../Film-Card/Film-Card';
 import PageSwitcher from '../Pagination/PageSwitcher';
 
+import {defaultRelease} from '../../const';
+
 import { PaginationContext } from '../../context/PaginationContext';
 import { ScreenContext } from '../../context/ScreenContext';
 import { FilterContext } from '../../context/FilterContext';
@@ -78,7 +80,7 @@ function filterArray(
       }
     })
     .filter((item) => {
-      if (options.sortedByYear === 'NONE') return true;
+      if (options.sortedByYear === defaultRelease) return true;
       return item.release_date.split('-')[0] === options.sortedByYear;
     })
     .filter((item) => {

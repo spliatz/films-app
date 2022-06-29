@@ -4083,6 +4083,8 @@ export const releaseYears = [
   },
 ];
 
+export const defaultRelease = 'ALL';
+
 export const dataCheckBox = [
   {
     id: 28,

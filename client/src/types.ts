@@ -7,12 +7,8 @@ export interface ActionFavoriteAndWatchLater {
   payload: number;
 }
 
-export interface IAuthReducer {
-  isAuth: boolean;
-}
-
 export interface IStore {
-  Auth: IAuthReducer;
+  Auth: boolean;
   Favourites: number[];
   WatchLater: number[];
 }

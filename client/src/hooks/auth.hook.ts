@@ -26,7 +26,7 @@ export const useAuth = () => {
   }, []);
 
   useEffect(() => {
-    setAuth(selector.isAuth);
+    setAuth(selector);
   }, [selector]);
 
   return { isAuth, login, logout };

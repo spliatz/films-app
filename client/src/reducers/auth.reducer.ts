@@ -1,15 +1,11 @@
-import { ActionAuth, IAuthReducer } from '../types';
+import { ActionAuth } from '../types';
 
-const initState = {
-  isAuth: false,
-};
-
-export const Auth = (state: IAuthReducer = initState, action: ActionAuth) => {
+export const Auth = (state: boolean = false, action: ActionAuth) => {
   switch (action.type) {
     case 'LOGIN':
-      return { isAuth: true };
+      return true;
     case 'LOGOUT':
-      return { isAuth: false };
+      return false;
     default:
       return state;
   }

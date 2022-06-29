@@ -1,12 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Film } from '../../types';
 import './Detail-FIlm-Card.scss';
-import { ScreenContext } from '../../context/ScreenContext';
-import { Table } from '@mui/material';
-
-interface Props {
-  film: Film;
-}
 
 const DetailFIlmCard: React.FC<Film> = ({
   backdrop_path,
@@ -14,7 +8,6 @@ const DetailFIlmCard: React.FC<Film> = ({
   original_title,
   overview,
   poster_path,
-  adult,
   vote_average,
   release_date,
   original_language,

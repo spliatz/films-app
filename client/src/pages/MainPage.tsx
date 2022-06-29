@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
+import { useAuth } from '../hooks/auth.hook';
 
 import Burger from '../components/Burger/Burger';
 import Filter from '../components/Filter/Filter';
@@ -8,21 +10,27 @@ import { FilterContext } from '../context/FilterContext';
 import { PaginationContext } from '../context/PaginationContext';
 import { ScreenContext } from '../context/ScreenContext';
 
-import { FilterPopularity, Filters } from '../types';
+import { FilterPopularity, Filters, UserFilter } from '../types';
 import { Data, dataCheckBox } from '../const';
 import { AuthPopupContext } from '../context/AuthPopup';
 
 const MainPage = () => {
   const { isMobile } = useContext(ScreenContext);
+
   const { isOpen } = useContext(AuthPopupContext);
   const [isBurgerOpen, setBurgerOpen] = useState(false);
+
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+
   const [filters, setFilters] = useState<Filters>({
     sortedByPopularity: FilterPopularity.PopularityDescending,
     sortedByYear: '2020',
     sortedCheckbox: dataCheckBox,
+    userFilters: UserFilter.DEFAULT,
   });
+
+  const { isAuth } = useAuth();
 
   const switchPage = (page: number) => {
     setPage(page);
@@ -44,13 +52,18 @@ const MainPage = () => {
     setFilters({ ...object });
   };
 
+  const sortByUser = (value: string) => {
+    const object = filters;
+    object.userFilters = value;
+    setFilters({ ...object });
+  };
+
   const resetFilters = () => {
     const object = filters;
+    object.userFilters = UserFilter.DEFAULT;
     object.sortedByPopularity = FilterPopularity.PopularityDescending;
-    object.sortedByYear = '2020';
-    object.sortedCheckbox.map((item) => {
-      item.checked = false;
-    });
+    object.sortedByYear = 'NONE';
+    object.sortedCheckbox.map((item) => (item.checked = false));
     setFilters({ ...object });
   };
 
@@ -65,6 +78,19 @@ const MainPage = () => {
     setFilters({ ...object });
   };
 
+  useEffect(() => {
+    resetFilters();
+  }, [isAuth]);
+
+  useEffect(() => {
+    //reset all filters without userFilters
+    const object = filters;
+    object.sortedByPopularity = FilterPopularity.PopularityDescending;
+    object.sortedByYear = 'NONE';
+    object.sortedCheckbox.map((item) => (item.checked = false));
+    setFilters({ ...object });
+  }, [filters.userFilters]);
+
   return (
     <FilterContext.Provider
       value={{
@@ -72,6 +98,7 @@ const MainPage = () => {
         sortByPopularity: sortByPopularity,
         sortByYear: sortByYear,
         sortByCheckbox: sortByCheckBox,
+        sortByUserFilter: sortByUser,
         reset: resetFilters,
       }}
     >

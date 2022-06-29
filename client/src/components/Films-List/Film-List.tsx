@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { Film, Filters, IStore, FilterPopularity } from '../../types';
+import { Film, Filters, IStore, FilterPopularity, UserFilter } from '../../types';
+
+import { useAuth } from '../../hooks/auth.hook';
 
 import FilmCard from '../Film-Card/Film-Card';
 import PageSwitcher from '../Pagination/PageSwitcher';
@@ -20,10 +22,15 @@ const FilmList: React.FC<Props> = ({ films }) => {
   const { isMobile } = useContext(ScreenContext);
   const { filters } = useContext(FilterContext);
 
+  const { isAuth } = useAuth();
+
   const favourites = useSelector((state: IStore) => state.Favourites);
   const watchLater = useSelector((state: IStore) => state.WatchLater);
 
-  const sortedFilms = sortArray(filterArray(films, filters, favourites, watchLater), filters);
+  const sortedFilms = sortArray(
+    filterArray(films, filters, favourites, watchLater, isAuth),
+    filters,
+  );
   const filmsOnPage = sortedFilms.slice(10 * page - 10, 10 * page);
 
   useEffect(() => {
@@ -45,11 +52,14 @@ const FilmList: React.FC<Props> = ({ films }) => {
   );
 };
 
-function filterArray(array: Film[], options: Filters, favourites: number[], watchLater: number[]) {
-  const favouriteID = 0;
-  const watchLaterID = 1;
-
-  let checked = options.sortedCheckbox // массив выбранных фильтров
+function filterArray(
+  array: Film[],
+  options: Filters,
+  favourites: number[],
+  watchLater: number[],
+  isAuth: boolean,
+) {
+  const checked = options.sortedCheckbox // массив выбранных фильтров
     .filter((item) => {
       return item.checked;
     })
@@ -57,19 +67,18 @@ function filterArray(array: Film[], options: Filters, favourites: number[], watc
       return item.id;
     });
 
-  if (checked.includes(favouriteID) && checked.includes(watchLaterID)) {
-    array = array.filter((item) => favourites.includes(item.id) || watchLater.includes(item.id));
-  } else if (checked.includes(favouriteID)) {
-    array = array.filter((item) => favourites.includes(item.id));
-  } else if (checked.includes(watchLaterID)) {
-    array = array.filter((item) => watchLater.includes(item.id));
-  }
-
-  checked = checked.filter((item) => item !== favouriteID && item !== watchLaterID); /* удалить
-  фильтры favourite и watchLater */
-
   return array
     .filter((item) => {
+      if (options.userFilters === UserFilter.DEFAULT || !isAuth) return true;
+      if (options.userFilters === UserFilter.FAVOURITE) {
+        return favourites.includes(item.id);
+      }
+      if (options.userFilters === UserFilter.WATCH_LATER) {
+        return watchLater.includes(item.id);
+      }
+    })
+    .filter((item) => {
+      if (options.sortedByYear === 'NONE') return true;
       return item.release_date.split('-')[0] === options.sortedByYear;
     })
     .filter((item) => {

@@ -40,6 +40,7 @@ export interface Filters {
   sortedByPopularity: string;
   sortedByYear: string;
   sortedCheckbox: FilterCheckBox[];
+  userFilters: string;
 }
 
 export enum FilterPopularity {
@@ -47,4 +48,10 @@ export enum FilterPopularity {
   PopularityDescending = 'PopularityDescending',
   RateAscending = 'RateAscending',
   RateDescending = 'RateDescending',
+}
+
+export enum UserFilter {
+  DEFAULT = 'DEFAULT',
+  FAVOURITE = 'FAVOURITE',
+  WATCH_LATER = 'WATCH_LATER',
 }

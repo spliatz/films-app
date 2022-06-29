@@ -4,12 +4,15 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { FilterContext } from '../../../context/FilterContext';
 import { releaseYears } from '../../../const';
-import { FilterPopularity } from '../../../types';
+import { FilterPopularity, UserFilter } from '../../../types';
+import { useAuth } from '../../../hooks/auth.hook';
 
 function SortedSelect() {
   const [sortedValue, setSortedValue] = useState('');
   const [releaseYear, setReleaseYear] = useState('');
-  const { sortByPopularity, sortByYear, filters } = useContext(FilterContext);
+  const [userFilter, setUserFilter] = useState('');
+  const { sortByPopularity, sortByYear, sortByUserFilter, filters } = useContext(FilterContext);
+  const { isAuth } = useAuth();
 
   const handleChangeSorted = (event: any) => {
     const value = event.target.value as string;
@@ -21,6 +24,11 @@ function SortedSelect() {
     sortByYear(value);
   };
 
+  const handleUserFilter = (event: any) => {
+    const value = event.target.value as string;
+    sortByUserFilter(value);
+  };
+
   useEffect(() => {
     const sortedByPop = filters.sortedByPopularity;
     !!sortedByPop
@@ -29,10 +37,31 @@ function SortedSelect() {
 
     const sortedByYear = filters.sortedByYear;
     !!sortedByYear ? setReleaseYear(sortedByYear) : setReleaseYear('2020');
+
+    const sortedByUserFilter = filters.userFilters;
+    !!sortedByUserFilter ? setUserFilter(sortedByUserFilter) : setUserFilter(UserFilter.DEFAULT);
   }, [filters]);
 
   return (
     <>
+      {isAuth && (
+        <FormControl sx={{ p: 1, minWidth: '100%' }}>
+          <TextField
+            label="User Filters:"
+            select
+            value={userFilter}
+            onChange={handleUserFilter}
+            size="small"
+            defaultValue="choose"
+            id="select-user"
+          >
+            <MenuItem value={UserFilter.DEFAULT}>Default</MenuItem>
+            <MenuItem value={UserFilter.FAVOURITE}>Favourite</MenuItem>
+            <MenuItem value={UserFilter.WATCH_LATER}>Watch Later</MenuItem>
+          </TextField>
+        </FormControl>
+      )}
+
       <FormControl sx={{ p: 1, minWidth: '100%' }}>
         <TextField
           label="Sorted by:"
@@ -51,6 +80,7 @@ function SortedSelect() {
           <MenuItem value={FilterPopularity.RateAscending}>Рейтинг по возрастанию</MenuItem>
         </TextField>
       </FormControl>
+
       <FormControl sx={{ p: 1, minWidth: '100%' }}>
         <TextField
           id="select-year"
@@ -60,6 +90,7 @@ function SortedSelect() {
           onChange={handleChangeYear}
           size="small"
         >
+          <MenuItem value="NONE">None</MenuItem>
           {releaseYears.map((year) => (
             <MenuItem key={year.value} value={year.value}>
               {year.label}

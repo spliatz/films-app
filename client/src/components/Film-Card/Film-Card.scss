@@ -47,31 +47,71 @@
             }
 
             .bookmark {
-                height: 20px;
-                width: 20px;
+                height: 25px;
+                width: fit-content;
                 border: none;
                 position: relative;
-                top: -4px;
+                top: -2px;
                 text-align: center;
-
-                img {
-                    height: inherit;
-                    width: inherit;
-                }
             }
 
-            .star {
-                width: 20px;
-                height: 20px;
-                transform: scale(1.6);
+            .star-btn {
+                width: fit-content;
+                height: 25px;
+                transform: scale(1.5);
                 position: relative;
-                top: -4px;
                 border: none;
                 text-align: center;
 
-                img {
-                    width: inherit;
-                    height: inherit;
+                .star-icon {
+                    position: relative;
+
+                    display: inline-block;
+                    width: 0;
+                    height: 0;
+
+                    margin-left: 0.9em;
+                    margin-right: 0.9em;
+                    margin-bottom: 1.2em;
+
+                    border-right: 0.3em solid transparent;
+                    border-bottom: 0.7em solid rgb(44, 43, 52);
+                    border-left: 0.3em solid transparent;
+
+                    /* Controlls the size of the stars. */
+                    font-size: 10px;
+
+                    &:before,
+                    &:after {
+                        content: '';
+
+                        display: block;
+                        width: 0;
+                        height: 0;
+
+                        position: absolute;
+                        top: 0.6em;
+                        left: -1em;
+
+                        border-right: 1em solid transparent;
+                        border-bottom: 0.7em solid rgb(44, 43, 52);
+                        border-left: 1em solid transparent;
+
+                        transform: rotate(-35deg);
+                    }
+
+                    &:after {
+                        transform: rotate(35deg);
+                    }
+                }
+
+                .star-icon-fill {
+                    border-bottom: 0.7em solid #fc0;
+
+                    &:before,
+                    &:after {
+                        border-bottom: 0.7em solid #fc0;
+                    }
                 }
             }
         }

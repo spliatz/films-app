@@ -1,106 +1,110 @@
 .detail__wrapper {
-  height: 100%;
-  width: 100vw;
-
-  .detail__content {
     height: 100%;
+    width: 100vw;
 
-    .top-block {
-      height: 80vh;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .top__content {
-        width: 100%;
+    .detail__content {
         height: 100%;
-        display: flex;
-        padding: 0 2rem;
-        justify-content: space-around;
-        align-items: center;
-        background-color: rgba(2, 8, 33, 0.4);
 
-        .top__poster {
-          img {
-            transform: scale(0.6);
-          }
+        .top-block {
+            height: 80vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .top__content {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                padding: 0 2rem;
+                justify-content: space-evenly;
+                align-items: center;
+                background-color: rgba(2, 8, 33, 0.4);
+
+                .top__poster {
+                    transform: scale(0.6);
+                    transition: all 0.3s 0s linear;
+
+                    &:hover {
+                        transform: scale(0.65);
+                    }
+                }
+
+                .main-info {
+                    color: white;
+                    font-family: Roboto, sans-serif;
+                    text-align: left;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+                    height: 100%;
+
+                    h1 {
+                        font-size: 2.4rem;
+                        margin-bottom: 2rem;
+                    }
+
+                    p {
+                        font-size: 1.6rem;
+                        margin-bottom: 1rem;
+                        word-break: break-word;
+                    }
+                }
+            }
         }
 
-        .main-info {
-          color: white;
-          font-family: Roboto, sans-serif;
-          text-align: left;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          height: 100%;
+        .other-info {
+            width: 100vw;
+            padding: 2rem 5rem 5rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-start;
+            font-family: Roboto, sans-serif;
+            gap: 10px;
 
-          h1 {
-            font-size: 2.4rem;
-            margin-bottom: 2rem;
-          }
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                color: #061134;
+            }
 
-          p {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            word-break: break-word;
-          }
+            p {
+                color: #1e1e1e;
+                font-size: 1.6rem;
+            }
+
+            p b {
+                color: black;
+            }
         }
-      }
     }
-
-    .other-info {
-      width: 100vw;
-      padding: 2rem 5rem 5rem 5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: flex-start;
-      font-family: Roboto, sans-serif;
-      gap: 10px;
-
-      h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #061134;
-      }
-
-      p {
-        color: #1e1e1e;
-        font-size: 1.6rem;
-      }
-
-      p b {
-        color: black;
-      }
-    }
-  }
 }
 
 @media (max-width: 600px) {
-  .top-block {
-    width: 100vw !important;
-    height: 100% !important;
-    background-color: white !important;
-  }
-
-  .top__content {
-    flex-direction: column;
-  }
-
-  .other-info {
-    padding: 20px !important;
-
-    h2 {
-      font-size: 1.6rem !important;
+    .top-block {
+        width: 100vw !important;
+        height: 100% !important;
+        background-color: white !important;
     }
 
-    p {
-      font-size: 1.2rem !important;
+    .top__content {
+        flex-direction: column;
     }
-  }
+
+    .other-info {
+        padding: 20px !important;
+
+        h2 {
+            font-size: 1.6rem !important;
+        }
+
+        p {
+            font-size: 1.2rem !important;
+        }
+    }
 }

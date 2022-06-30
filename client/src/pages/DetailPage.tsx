@@ -5,26 +5,24 @@ import { Data } from '../const';
 import { Film } from '../types';
 
 const DetailPage = () => {
-  const [film, setFilm] = useState<Film | null>(null);
-  const id = Number(useParams().id);
+    const [film, setFilm] = useState<Film | null>(null);
+    const id = Number(useParams().id);
 
-  useEffect(() => {
-    const searchedFilm = Data.filter((item) => item.id === id)[0];
+    useEffect(() => {
+        const searchedFilm = Data.filter((item) => item.id === id)[0];
 
-    if (searchedFilm) {
-      setFilm(searchedFilm);
-    } else {
-      setFilm(null);
-    }
-  }, [film]);
+        if (searchedFilm) {
+            setFilm(searchedFilm);
+        } else {
+            setFilm(null);
+        }
+    }, [film]);
 
-  useEffect(() => {
     if (film) {
-      document.title = film.title || film.original_title;
+        document.title = film.title || film.original_title;
     }
-  }, [film]);
 
-  return <>{film && <DetailFIlmCard {...film} />}</>;
+    return <>{film && <DetailFIlmCard {...film} />}</>;
 };
 
 export default DetailPage;

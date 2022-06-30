@@ -4,30 +4,30 @@ import { ActionLogin, ActionLogout } from '../reducers/auth.reducer';
 import { IStore } from '../types';
 
 export const useAuth = () => {
-  const [isAuth, setAuth] = useState(false);
+    const [isAuth, setAuth] = useState(false);
 
-  const selector = useSelector((state: IStore) => state.Auth);
-  const dispatch = useDispatch();
+    const selector = useSelector((state: IStore) => state.Auth);
+    const dispatch = useDispatch();
 
-  const login = useCallback(() => {
-    localStorage.setItem('user', JSON.stringify(new Date()));
-    dispatch(ActionLogin());
-  }, []);
+    const login = useCallback(() => {
+        localStorage.setItem('user', JSON.stringify(new Date()));
+        dispatch(ActionLogin());
+    }, []);
 
-  const logout = useCallback(() => {
-    localStorage.removeItem('user');
-    dispatch(ActionLogout());
-  }, []);
+    const logout = useCallback(() => {
+        localStorage.removeItem('user');
+        dispatch(ActionLogout());
+    }, []);
 
-  useEffect(() => {
-    if (!!JSON.parse(localStorage.getItem('user') as string)) {
-      dispatch(ActionLogin());
-    }
-  }, []);
+    useEffect(() => {
+        if (!!JSON.parse(localStorage.getItem('user') as string)) {
+            dispatch(ActionLogin());
+        }
+    }, []);
 
-  useEffect(() => {
-    setAuth(selector);
-  }, [selector]);
+    useEffect(() => {
+        setAuth(selector);
+    }, [selector]);
 
-  return { isAuth, login, logout };
+    return { isAuth, login, logout };
 };

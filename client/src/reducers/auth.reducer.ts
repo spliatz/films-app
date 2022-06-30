@@ -1,20 +1,20 @@
 import { ActionAuth } from '../types';
 
 export const Auth = (state: boolean = false, action: ActionAuth) => {
-  switch (action.type) {
-    case 'LOGIN':
-      return true;
-    case 'LOGOUT':
-      return false;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case 'LOGIN':
+            return true;
+        case 'LOGOUT':
+            return false;
+        default:
+            return state;
+    }
 };
 
 export const ActionLogin = () => ({
-  type: 'LOGIN',
+    type: 'LOGIN',
 });
 
 export const ActionLogout = () => ({
-  type: 'LOGOUT',
+    type: 'LOGOUT',
 });

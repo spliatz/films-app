@@ -1,102 +1,102 @@
 .film-card {
-  color: green;
-  width: 300px;
-  display: flex;
-  flex-basis: 370px;
-  height: 270px;
-  -webkit-box-shadow: -4px 1px 13px -3px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: -4px 1px 13px -3px rgba(0, 0, 0, 0.25);
-  box-shadow: -4px 1px 13px -3px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-
-  .card-image {
-    height: 100%;
-    border-radius: 5px;
-    flex-basis: 50%;
-
-    img {
-      height: calc(100% + 5px);
-      width: 100%;
-      border-radius: 5px 0 0 5px;
-    }
-  }
-
-  .card-info {
-    flex-basis: 50%;
-    font-size: 16px;
-    font-family: Roboto, sans-serif;
-    color: black;
+    color: green;
+    width: 300px;
     display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    align-items: flex-start;
+    flex-basis: 370px;
+    height: 270px;
+    -webkit-box-shadow: -4px 1px 13px -3px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: -4px 1px 13px -3px rgba(0, 0, 0, 0.25);
+    box-shadow: -4px 1px 13px -3px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 
-    .rate-and-buttons {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      position: relative;
-
-      p {
-        word-break: keep-all;
-        text-align: start;
-      }
-
-      .bookmark {
-        height: 20px;
-        width: 20px;
-        border: none;
-        position: relative;
-        top: -4px;
-        text-align: center;
+    .card-image {
+        height: 100%;
+        border-radius: 5px;
+        flex-basis: 50%;
 
         img {
-          height: inherit;
-          width: inherit;
+            height: calc(100% + 5px);
+            width: 100%;
+            border-radius: 5px 0 0 5px;
         }
-      }
+    }
 
-      .star {
-        width: 20px;
-        height: 20px;
-        transform: scale(1.6);
-        position: relative;
-        top: -4px;
-        border: none;
-        text-align: center;
+    .card-info {
+        flex-basis: 50%;
+        font-size: 16px;
+        font-family: Roboto, sans-serif;
+        color: black;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-around;
+        align-items: flex-start;
 
-        img {
-          width: inherit;
-          height: inherit;
+        .rate-and-buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            position: relative;
+
+            p {
+                word-break: keep-all;
+                text-align: start;
+            }
+
+            .bookmark {
+                height: 20px;
+                width: 20px;
+                border: none;
+                position: relative;
+                top: -4px;
+                text-align: center;
+
+                img {
+                    height: inherit;
+                    width: inherit;
+                }
+            }
+
+            .star {
+                width: 20px;
+                height: 20px;
+                transform: scale(1.6);
+                position: relative;
+                top: -4px;
+                border: none;
+                text-align: center;
+
+                img {
+                    width: inherit;
+                    height: inherit;
+                }
+            }
         }
-      }
-    }
 
-    h3 {
-      margin-left: 10px;
-      font-size: 16px;
-      font-weight: 500;
-      word-break: break-word;
-      letter-spacing: 0.5px;
-      text-align: start;
-    }
+        h3 {
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            word-break: break-word;
+            letter-spacing: 0.5px;
+            text-align: start;
+        }
 
-    .divide-line {
-      width: 100%;
-      background: rgba(128, 128, 128, 0.35);
-      height: 1px;
-    }
+        .divide-line {
+            width: 100%;
+            background: rgba(128, 128, 128, 0.35);
+            height: 1px;
+        }
 
-    .more-info {
-      margin-left: 10px;
-      margin-bottom: 5px;
-      font-size: 14px;
-      font-family: Roboto, sans-serif;
-      text-align: start;
+        .more-info {
+            margin-left: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            text-align: start;
+        }
     }
-  }
 }

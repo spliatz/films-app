@@ -10,52 +10,52 @@ import './index.scss';
 import AuthorizationPopup from './components/autorization-popup/authorization-popup';
 
 const App = () => {
-  const { isMobile, changeWidth } = useScreen(document.body.clientWidth);
+    const { isMobile, changeWidth } = useScreen(document.body.clientWidth);
 
-  const { isAuth } = useAuth();
+    const { isAuth } = useAuth();
 
-  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+    const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
 
-  const routes = useRoutes(isAuth);
+    const routes = useRoutes(isAuth);
 
-  useLayoutEffect(() => {
-    function updateSize() {
-      changeWidth(document.body.clientWidth);
-    }
+    useLayoutEffect(() => {
+        function updateSize() {
+            changeWidth(document.body.clientWidth);
+        }
 
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
-  });
+        window.addEventListener('resize', updateSize);
+        return () => window.removeEventListener('resize', updateSize);
+    });
 
-  const onOpenLoginPopupHandler = () => {
-    setLoginPopupOpen(true);
-  };
+    const onOpenLoginPopupHandler = () => {
+        setLoginPopupOpen(true);
+    };
 
-  const onCloseLoginPopupHandler = () => {
-    setLoginPopupOpen(false);
-  };
+    const onCloseLoginPopupHandler = () => {
+        setLoginPopupOpen(false);
+    };
 
-  return (
-    <BrowserRouter>
-      <ScreenContext.Provider
-        value={{
-          isMobile: isMobile,
-        }}
-      >
-        <AuthPopupContext.Provider
-          value={{
-            isOpen: isLoginPopupOpen,
-            open: onOpenLoginPopupHandler,
-            close: onCloseLoginPopupHandler,
-          }}
-        >
-          <Header />
-          {isLoginPopupOpen && <AuthorizationPopup />}
-          {routes}
-        </AuthPopupContext.Provider>
-      </ScreenContext.Provider>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <ScreenContext.Provider
+                value={{
+                    isMobile: isMobile,
+                }}
+            >
+                <AuthPopupContext.Provider
+                    value={{
+                        isOpen: isLoginPopupOpen,
+                        open: onOpenLoginPopupHandler,
+                        close: onCloseLoginPopupHandler,
+                    }}
+                >
+                    <Header />
+                    {isLoginPopupOpen && <AuthorizationPopup />}
+                    {routes}
+                </AuthPopupContext.Provider>
+            </ScreenContext.Provider>
+        </BrowserRouter>
+    );
 };
 
 export default App;

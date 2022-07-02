@@ -8,15 +8,20 @@ import { AuthPopupContext } from '../../context/AuthPopup';
 import './Film-Card.scss';
 
 const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
-    const [isFavourite, setFavourite] = useState(false);
-    const [isWatchLater, setWatchLater] = useState(false);
-
     const { isAuth } = useAuth();
     const { open } = useContext(AuthPopupContext);
 
     const favouriteFilms = useSelector((state: IStore) => state.Favourites);
     const watchLaterFilms = useSelector((state: IStore) => state.WatchLater);
     const dispatch = useDispatch();
+
+    let isFavourite = false;
+    let isWatchLater = false;
+
+    if (isAuth) {
+        isFavourite = favouriteFilms.includes(id);
+        isWatchLater = watchLaterFilms.includes(id);
+    }
 
     const onFavouriteHandler = () => {
         if (!isAuth) return open();
@@ -35,16 +40,6 @@ const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
 
         dispatch(ActionWatchLaterAdd(id));
     };
-
-    useEffect(() => {
-        if (!isAuth) {
-            setFavourite(false);
-            setWatchLater(false);
-            return;
-        }
-        setFavourite(favouriteFilms.includes(id));
-        setWatchLater(watchLaterFilms.includes(id));
-    }, [favouriteFilms, watchLaterFilms, isAuth]);
 
     return (
         <div className="film-card">

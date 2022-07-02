@@ -2,21 +2,18 @@ import React, { useLayoutEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import { ScreenContext } from './context/ScreenContext';
 import { useScreen } from './hooks/screen.hook';
-import { useAuth } from './hooks/auth.hook';
 import { BrowserRouter } from 'react-router-dom';
 import { useRoutes } from './routes';
 import { AuthPopupContext } from './context/AuthPopup';
-import './index.scss';
 import AuthorizationPopup from './components/autorization-popup/authorization-popup';
+import './index.scss';
 
 const App = () => {
     const { isMobile, changeWidth } = useScreen(document.body.clientWidth);
 
-    const { isAuth } = useAuth();
-
     const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
 
-    const routes = useRoutes(isAuth);
+    const routes = useRoutes();
 
     useLayoutEffect(() => {
         function updateSize() {

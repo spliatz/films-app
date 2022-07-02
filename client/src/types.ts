@@ -55,3 +55,19 @@ export enum UserFilter {
     FAVOURITE = 'FAVOURITE',
     WATCH_LATER = 'WATCH_LATER',
 }
+
+export interface ISearchForm {
+    rate: null | string;
+    popularity: null | string;
+    genre: null | number;
+}
+
+export enum RateEnum {
+    HIGH = 'HIGH',
+    LOW = 'LOW',
+}
+
+export enum PopularityEnum {
+    HIGH = 'HIGH',
+    LOW = 'LOW',
+}

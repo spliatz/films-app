@@ -1,0 +1,100 @@
+.search__wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 40px;
+    font-family: Roboto, sans-serif;
+    color: rgba(161, 187, 255, 1);
+}
+
+.search__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    padding: 50px 0;
+
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 430px;
+        width: 35%;
+
+        .submit-btn {
+            font-family: Roboto, sans-serif;
+            padding: 15px 25px;
+            font-size: 16px;
+            border: 1px solid #3b00cd;
+            transition: all 0.3s 0s linear;
+
+            &:hover {
+                color: #7cafcd;
+                background: #212d30;
+                border: 1px solid rgba(0, 0, 0, 0);
+            }
+        }
+    }
+
+    .search-answer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .film-card {
+            width: 450px;
+        }
+
+        .accept-denied {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
+            width: 100%;
+
+            a {
+                border: 1px solid black;
+                padding: 10px;
+                flex-basis: 49%;
+                transition: all 0.3s 0s linear;
+                text-align: center;
+                font-size: 16px;
+
+                &:hover {
+                    border: 1px solid white;
+                    background: black;
+                    color: white;
+                }
+            }
+
+            button {
+                border: 1px solid black;
+                padding: 10px;
+                flex-basis: 49%;
+                transition: all 0.3s 0s linear;
+                text-align: center;
+                font-size: 16px;
+
+                &:hover {
+                    border: 1px solid white;
+                    background: black;
+                    color: white;
+                }
+            }
+        }
+
+        .films-empty-error {
+            font-size: 30px;
+            font-family: Roboto, sans-serif;
+        }
+    }
+}

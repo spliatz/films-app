@@ -20,7 +20,6 @@ router.get('/:id', userExists, jsonParser, (req, res) => {
                     if (err) return console.log(err);
                     res.json(favourite.list);
                 });
-                console.log('fav is null');
             } else {
                 res.json(fav.list);
             }

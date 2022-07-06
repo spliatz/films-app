@@ -12,7 +12,7 @@ const SearchPage = () => {
         genre: null,
     });
 
-    const [order, serOrder] = useState(0);
+    const [order, setOrder] = useState(0);
 
     const [films, setFilms] = useState<Film[] | null>(null);
 
@@ -26,7 +26,7 @@ const SearchPage = () => {
 
     const changeOrder = () => {
         if (films) {
-            serOrder((prev) => {
+            setOrder((prev) => {
                 if (films[prev + 1]) return prev + 1;
                 return 1;
             });

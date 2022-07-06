@@ -20,7 +20,6 @@ router.get('/:id', userExists, jsonParser, (req, res) => {
                     if (err) return console.log(err);
                     res.json(newWatchLater.list);
                 });
-                console.log('watch later is null');
             } else {
                 res.json(warchlater.list);
             }

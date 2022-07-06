@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import { useAuth } from '../hooks/auth.hook';
-
 import Burger from '../components/Burger/Burger';
 import Filter from '../components/Filter/Filter';
 import FilmList from '../components/Films-List/Film-List';
-
 import { FilterContext } from '../context/FilterContext';
-import { PaginationContext } from '../context/PaginationContext';
 import { ScreenContext } from '../context/ScreenContext';
-
 import { FilterPopularity, Filters, UserFilter } from '../types';
 import { Data, dataCheckBox, defaultRelease } from '../const';
 import { AuthPopupContext } from '../context/AuthPopup';
+import usePagination from '../hooks/pagination.hook';
 
 const MainPage = () => {
     const { isMobile } = useContext(ScreenContext);
@@ -20,8 +16,12 @@ const MainPage = () => {
     const { isOpen } = useContext(AuthPopupContext);
     const [isBurgerOpen, setBurgerOpen] = useState(false);
 
-    const [page, setPage] = useState(1);
-    const [pageCount, setPageCount] = useState(1);
+    const {
+        page,
+        setPage,
+        totalPages,
+        updateCount
+    } = usePagination({contentPerPage: 10, initialCount: Data.length})
 
     const [filters, setFilters] = useState<Filters>({
         sortedByPopularity: FilterPopularity.PopularityDescending,
@@ -31,14 +31,6 @@ const MainPage = () => {
     });
 
     const { isAuth } = useAuth();
-
-    const switchPage = (page: number) => {
-        setPage(page);
-    };
-
-    const changePageCount = (pages: number) => {
-        setPageCount(pages);
-    };
 
     const sortByPopularity = (value: string) => {
         const object = filters;
@@ -102,25 +94,33 @@ const MainPage = () => {
                 reset: resetFilters,
             }}
         >
-            <PaginationContext.Provider
-                value={{
-                    page: page,
-                    setPage: switchPage,
-                    pageCount: pageCount,
-                    setPageCount: changePageCount,
-                }}
-            >
                 <div
                     className={isMobile ? 'main mobile' : 'main'}
                     style={{ userSelect: isOpen ? 'none' : 'inherit' }}
                 >
-                    {(!isMobile && <Filter />) || (
-                        <Burger isOpen={isBurgerOpen} setOpen={setBurgerOpen} />
+                    {(!isMobile &&
+                        <Filter
+                        totalPages={totalPages}
+                        page={page}
+                        setPage={setPage}
+                        />) || (
+
+                        <Burger
+                            isOpen={isBurgerOpen}
+                            setOpen={setBurgerOpen}
+                            page={page} setPage={setPage} totalPages={totalPages}
+                        />
                     )}
 
-                    {!isBurgerOpen && <FilmList films={Data} />}
+                    {!isBurgerOpen &&
+                    <FilmList
+                        films={Data}
+                        totalPages={totalPages}
+                        page={page}
+                        setPage={setPage}
+                        updateCount={updateCount}
+                    />}
                 </div>
-            </PaginationContext.Provider>
         </FilterContext.Provider>
     );
 };

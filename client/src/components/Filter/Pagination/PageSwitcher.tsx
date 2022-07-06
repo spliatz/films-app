@@ -2,12 +2,16 @@ import React, { useContext } from 'react';
 import FormGroup from '@mui/material/FormGroup';
 import Typography from '@mui/material/Typography';
 import { Pagination } from '@mui/material';
-import { PaginationContext } from '../../context/PaginationContext';
-import { ScreenContext } from '../../context/ScreenContext';
+import { ScreenContext } from '../../../context/ScreenContext';
 import './PageSwitcher.scss';
 
-const PageSwitcher = () => {
-    const { page, setPage, pageCount } = useContext(PaginationContext);
+interface Props {
+    page: number;
+    setPage: (n: number) => void;
+    totalPages: number;
+}
+
+const PageSwitcher: React.FC<Props> = ({page, setPage, totalPages}) => {
     const { isMobile } = useContext(ScreenContext);
 
     const onSwitchPageHandler = (e: React.ChangeEvent<unknown>, page: number) => {
@@ -27,14 +31,14 @@ const PageSwitcher = () => {
             }}
         >
             <Pagination
-                count={pageCount}
+                count={totalPages}
                 size={isMobile ? 'large' : 'medium'}
                 page={page}
                 onChange={onSwitchPageHandler}
             />
 
             <Typography sx={{ fontSize: '18px' }}>
-                {(pageCount !== 0 && page + ' of ' + pageCount) || 'страницы отсутствуют'}
+                {(totalPages !== 0 && page + ' of ' + totalPages) || 'страницы отсутствуют'}
             </Typography>
         </FormGroup>
     );

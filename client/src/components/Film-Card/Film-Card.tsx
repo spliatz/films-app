@@ -2,21 +2,22 @@ import React, { useContext } from 'react';
 import { Film } from '../../types';
 import { useAuth } from '../../hooks/auth.hook';
 import { AuthPopupContext } from '../../context/AuthPopup';
-import { API } from '../../services/ApiService';
+import { FavouriteAPI } from '../../services/FavouritesService';
+import { WatchLaterAPI } from '../../services/WatchLaterService';
 import './Film-Card.scss';
 
 const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
     const { isAuth, token } = useAuth();
     const { open } = useContext(AuthPopupContext);
 
-    const { data: favourites } = API.useFetchUserFavouritesQuery(token);
-    const { data: watchLaterFilms } = API.useFetchUserWatchLaterQuery(token);
+    const { data: favourites } = FavouriteAPI.useFetchUserFavouritesQuery(token);
+    const { data: watchLaterFilms } = WatchLaterAPI.useFetchUserWatchLaterQuery(token);
 
-    const [addFavourite] = API.useAddUserFavouritesMutation();
-    const [removeFavourite] = API.useRemoveUserFavouritesMutation();
+    const [addFavourite] = FavouriteAPI.useAddUserFavouritesMutation();
+    const [removeFavourite] = FavouriteAPI.useRemoveUserFavouritesMutation();
 
-    const [addWatchLater] = API.useAddUserWatchLaterMutation();
-    const [removeWatchLater] = API.useRemoveUserWatchLaterMutation();
+    const [addWatchLater] = WatchLaterAPI.useAddUserWatchLaterMutation();
+    const [removeWatchLater] = WatchLaterAPI.useRemoveUserWatchLaterMutation();
 
     let isFavourite = false;
     let isWatchLater = false;

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import reducer from '../reducers/index';
-import { API } from '../services/ApiService';
+import { FavouriteAPI } from '../services/FavouritesService';
+import { WatchLaterAPI } from '../services/WatchLaterService';
 
 const store = configureStore({
     reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(API.middleware),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(FavouriteAPI.middleware).concat(WatchLaterAPI.middleware),
 });
 
 export default store;

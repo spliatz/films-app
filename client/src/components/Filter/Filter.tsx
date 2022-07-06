@@ -5,10 +5,16 @@ import Button from '@mui/material/Button';
 import SortedSelect from './FilterSorted/SortedSelect';
 import SortedCheckboxList from './FilterSorted/SortedCheckboxList';
 import { ScreenContext } from '../../context/ScreenContext';
-import PageSwitcher from '../Pagination/PageSwitcher';
+import PageSwitcher from './Pagination/PageSwitcher';
 import { FilterContext } from '../../context/FilterContext';
 
-const Filter = () => {
+interface Props {
+    page: number;
+    setPage: (n: number) => void;
+    totalPages: number;
+}
+
+const Filter: React.FC<Props> = ({page, setPage, totalPages}) => {
     const { isMobile } = useContext(ScreenContext);
     const { reset } = useContext(FilterContext);
 
@@ -44,7 +50,7 @@ const Filter = () => {
             </Button>
             <SortedSelect />
             <SortedCheckboxList />
-            {!isMobile && <PageSwitcher />}
+            {!isMobile && <PageSwitcher page={page} setPage={setPage} totalPages={totalPages} />}
         </Card>
     );
 };

@@ -5,9 +5,12 @@ import './Burger.scss';
 interface Props {
     isOpen: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
+    page: number;
+    setPage: (n: number) => void;
+    totalPages: number;
 }
 
-const Burger: React.FC<Props> = ({ isOpen, setOpen }) => {
+const Burger: React.FC<Props> = ({ isOpen, setOpen, page, setPage, totalPages }) => {
     const [animationClass, setAnimClass] = useState('close');
 
     const onOpenHandler = () => {
@@ -23,7 +26,7 @@ const Burger: React.FC<Props> = ({ isOpen, setOpen }) => {
                     <div className={'stick stick-2 ' + animationClass} />
                     <div className={'stick stick-3 ' + animationClass} />
                 </button>
-                <Filter />
+                <Filter page={page} setPage={setPage} totalPages={totalPages}/>
             </>
         );
     }

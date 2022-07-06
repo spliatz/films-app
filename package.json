@@ -1,5 +1,19 @@
 {
-  "dependencies": {
-    "materialize-css": "^1.0.0"
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "movies",
+  "scripts": {
+    "server": "npm run server --prefix server",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "mern",
+    "react"
+  ],
+  "author": "David Keren <spliatzoff@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.2.2"
   }
 }

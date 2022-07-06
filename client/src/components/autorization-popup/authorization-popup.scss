@@ -11,6 +11,7 @@
 
 .auth__content {
     background: rgba(1, 13, 30, 0.85);
+    width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,19 +121,40 @@
                 background: none;
             }
         }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            background: none;
 
-        .form-button {
-            width: 100px;
-            height: 40px;
-            padding: 5px;
-            color: black;
-            text-align: center;
-            font-size: 16px;
-            border: none;
-            border-radius: 12px;
-            overflow: hidden;
-            background: white;
-            user-select: none;
+            .form-button {
+                width: 100px;
+                height: 40px;
+                padding: 5px;
+                color: black;
+                text-align: center;
+                font-size: 16px;
+                border: none;
+                border-radius: 12px;
+                overflow: hidden;
+                background: white;
+                user-select: none;
+            }
+
+            .auth-btn {
+                width: 200px;
+                word-break: break-word;
+                font-size: 14px;
+                color: #949494;
+                border: none;
+                padding: 5px;
+                user-select: none;
+                transition: all 0.3s 0s linear;
+
+                &:hover {
+                    color: white;
+                    text-decoration: underline;
+                }
+            }
         }
     }
 }

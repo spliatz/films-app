@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { ISearchForm, RateEnum, PopularityEnum } from '../../types';
 import { dataCheckBox } from '../../const';
 

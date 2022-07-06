@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Film, IStore } from '../../types';
+import { Film } from '../../types';
 import { sortArray, filterArray } from './utils';
 
 import { useAuth } from '../../hooks/auth.hook';
@@ -11,7 +11,7 @@ import { PaginationContext } from '../../context/PaginationContext';
 import { ScreenContext } from '../../context/ScreenContext';
 import { FilterContext } from '../../context/FilterContext';
 
-import { useSelector } from 'react-redux';
+import { API } from '../../services/ApiService';
 import './Films-List.scss';
 
 interface Props {
@@ -23,10 +23,10 @@ const FilmList: React.FC<Props> = ({ films }) => {
     const { isMobile } = useContext(ScreenContext);
     const { filters } = useContext(FilterContext);
 
-    const { isAuth } = useAuth();
+    const { isAuth, token } = useAuth();
 
-    const favourites = useSelector((state: IStore) => state.Favourites);
-    const watchLater = useSelector((state: IStore) => state.WatchLater);
+    const { data: favourites } = API.useFetchUserFavouritesQuery(token);
+    const { data: watchLater } = API.useFetchUserWatchLaterQuery(token);
 
     const sortedFilms = sortArray(
         filterArray(films, filters, favourites, watchLater, isAuth),

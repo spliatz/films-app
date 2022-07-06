@@ -1,5 +1,6 @@
 export interface ActionAuth {
     type: string;
+    payload?: string;
 }
 
 export interface ActionFavoriteAndWatchLater {
@@ -8,9 +9,14 @@ export interface ActionFavoriteAndWatchLater {
 }
 
 export interface IStore {
-    Auth: boolean;
+    Auth: IAuth;
     Favourites: number[];
     WatchLater: number[];
+}
+
+interface IAuth {
+    isAuth: boolean;
+    token: string;
 }
 
 export interface Film {

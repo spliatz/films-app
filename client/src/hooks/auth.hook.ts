@@ -8,10 +8,11 @@ export const useAuth = () => {
 
     const selector = useSelector((state: IStore) => state.Auth);
     const dispatch = useDispatch();
+    const token = selector.token;
 
-    const login = useCallback(() => {
-        localStorage.setItem('user', JSON.stringify(new Date()));
-        dispatch(ActionLogin());
+    const login = useCallback((token: string) => {
+        localStorage.setItem('user', JSON.stringify(token));
+        dispatch(ActionLogin(token));
     }, []);
 
     const logout = useCallback(() => {
@@ -20,14 +21,15 @@ export const useAuth = () => {
     }, []);
 
     useEffect(() => {
-        if (!!JSON.parse(localStorage.getItem('user') as string)) {
-            dispatch(ActionLogin());
+        const user = JSON.parse(localStorage.getItem('user') as string);
+        if (user) {
+            dispatch(ActionLogin(user));
         }
     }, []);
 
     useEffect(() => {
-        setAuth(selector);
-    }, [selector]);
+        setAuth(selector.isAuth);
+    }, [selector.isAuth]);
 
-    return { isAuth, login, logout };
+    return { isAuth, login, logout, token };
 };

@@ -11,6 +11,13 @@ module.exports = {
     devServer: {
         port: 3031,
         historyApiFallback: true,
+        proxy: {
+            '/api/**': {
+                target: 'http://localhost:6781', // backend port is 6781
+                secure: false,
+                changeOrigin: true,
+            }
+        },
     },
     entry: {
         scripts: './src/index.tsx',

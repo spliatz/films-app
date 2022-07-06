@@ -1,44 +1,47 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Film, IStore } from '../../types';
-import { useDispatch, useSelector } from 'react-redux';
-import { ActionFavouriteAdd, ActionFavouriteRemove } from '../../reducers/favourite.reducer';
-import { ActionWatchLaterAdd, ActionWatchLaterRemove } from '../../reducers/watchLater.reducer';
+import React, { useContext } from 'react';
+import { Film } from '../../types';
 import { useAuth } from '../../hooks/auth.hook';
 import { AuthPopupContext } from '../../context/AuthPopup';
+import { API } from '../../services/ApiService';
 import './Film-Card.scss';
 
 const FilmCard: React.FC<Film> = ({ vote_average, poster_path, title, id }) => {
-    const { isAuth } = useAuth();
+    const { isAuth, token } = useAuth();
     const { open } = useContext(AuthPopupContext);
 
-    const favouriteFilms = useSelector((state: IStore) => state.Favourites);
-    const watchLaterFilms = useSelector((state: IStore) => state.WatchLater);
-    const dispatch = useDispatch();
+    const { data: favourites } = API.useFetchUserFavouritesQuery(token);
+    const { data: watchLaterFilms } = API.useFetchUserWatchLaterQuery(token);
+
+    const [addFavourite] = API.useAddUserFavouritesMutation();
+    const [removeFavourite] = API.useRemoveUserFavouritesMutation();
+
+    const [addWatchLater] = API.useAddUserWatchLaterMutation();
+    const [removeWatchLater] = API.useRemoveUserWatchLaterMutation();
 
     let isFavourite = false;
     let isWatchLater = false;
 
-    if (isAuth) {
-        isFavourite = favouriteFilms.includes(id);
+    if (isAuth && favourites && watchLaterFilms) {
+        isFavourite = favourites.includes(id);
         isWatchLater = watchLaterFilms.includes(id);
     }
 
-    const onFavouriteHandler = () => {
+    const onFavouriteHandler = async () => {
         if (!isAuth) return open();
-        if (favouriteFilms.includes(id)) {
-            return dispatch(ActionFavouriteRemove(id));
+        if (favourites.includes(id)) {
+            await removeFavourite({ token: token, put: { filmId: id } });
+        } else {
+            await addFavourite({ token: token, put: { filmId: id } });
         }
-
-        dispatch(ActionFavouriteAdd(id));
     };
 
-    const onWatchLaterHandler = () => {
+    const onWatchLaterHandler = async () => {
         if (!isAuth) return open();
         if (watchLaterFilms.includes(id)) {
-            return dispatch(ActionWatchLaterRemove(id));
+            await removeWatchLater({ token: token, put: { filmId: id } });
+        } else {
+            await addWatchLater({ token: token, put: { filmId: id } });
         }
-
-        dispatch(ActionWatchLaterAdd(id));
     };
 
     return (

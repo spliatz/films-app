@@ -1,18 +1,29 @@
 import { ActionAuth } from '../types';
 
-export const Auth = (state: boolean = false, action: ActionAuth) => {
+export interface init {
+    isAuth: boolean;
+    token: null | string;
+}
+
+const initial: init = {
+    isAuth: false,
+    token: '',
+};
+
+export const Auth = (state: init = initial, action: ActionAuth) => {
     switch (action.type) {
         case 'LOGIN':
-            return true;
+            return Object.assign({}, state, { isAuth: true, token: action.payload });
         case 'LOGOUT':
-            return false;
+            return Object.assign({}, state, { isAuth: false, token: '' });
         default:
             return state;
     }
 };
 
-export const ActionLogin = () => ({
+export const ActionLogin = (payload: string) => ({
     type: 'LOGIN',
+    payload,
 });
 
 export const ActionLogout = () => ({

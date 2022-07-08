@@ -1,6 +1,6 @@
-const User = require('../models/user');
+import User from '../models/user.js';
 
-module.exports = (req, res, next) => {
+export default function userExists(req, res, next) {
     const id = req.params.id;
     try {
         User.findById(id, (err, user) => {
@@ -11,4 +11,4 @@ module.exports = (req, res, next) => {
     } catch (err) {
         return console.log(err);
     }
-};
+}

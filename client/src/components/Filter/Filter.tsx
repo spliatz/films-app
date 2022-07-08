@@ -34,7 +34,7 @@ const Filter: React.FC<Props> = ({page, setPage, totalPages}) => {
                 boxShadow: '0px 0px 21px 5px rgba(16, 32, 45, 0.2)',
                 height: '100%',
                 width: '100%',
-                alignSelf: 'flex-start',
+                alignSelf: isMobile ? "center" : "flex-start",
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',

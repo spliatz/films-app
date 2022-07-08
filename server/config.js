@@ -1,4 +1,2 @@
-module.exports = {
-    PORT: 6781,
-    dbURL: 'mongodb://localhost:27017/userdb',
-};
+export const PORT = 6781;
+export const dbURL = 'mongodb://localhost:27017/userdb';

@@ -17,14 +17,21 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
     .film-list-wrapper {
+        padding: 0;
         padding-bottom: 2rem;
-        justify-content: center;
+        justify-content: space-around;
 
         .films-empty-error {
             font-size: 4rem;
             text-align: center;
         }
+    }
+}
+
+@media (max-width: 850px) {
+    .film-list-wrapper {
+        justify-content: center;
     }
 }

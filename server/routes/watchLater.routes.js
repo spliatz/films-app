@@ -1,78 +1,19 @@
-const express = require('express');
-const { Router } = require('express');
-const router = Router();
-const userExists = require('../middleware/userExists-middleware');
-const WatchLater = require('../models/watchLater');
-const jsonParser = express.json();
+import { Router } from 'express';
+const WatchLaterRouter = Router();
+import userExists from '../middleware/userExists-middleware.js';
+import WatchLaterController from '../controllers/WatchLaterController.js';
 
-router.get('/', (req, res) => {
+WatchLaterRouter.get('/', (req, res) => {
     res.status(200);
 });
 
 // /api/watch-later/    get watch later list by userId
-router.get('/:id', userExists, jsonParser, (req, res) => {
-    try {
-        WatchLater.findOne({ owner: req.user.id }, (err, warchlater) => {
-            if (err) return res.status(401);
-            if (warchlater === null) {
-                const newWatchLater = new WatchLater({ owner: req.user.id, list: [] });
-                newWatchLater.save((err) => {
-                    if (err) return console.log(err);
-                    res.json(newWatchLater.list);
-                });
-            } else {
-                res.json(warchlater.list);
-            }
-        });
-    } catch (err) {
-        return console.log(err);
-    }
-});
+WatchLaterRouter.get('/:id', userExists, WatchLaterController.getByUserId);
 
 // /api/watch-later/    add film by filmId
-router.put('/add/:id', userExists, jsonParser, async (req, res) => {
-    if (!req.body) return res.status(400).json({ message: 'Film does not exists' });
-    const filmId = req.body.filmId;
-    try {
-        const newWatchLater = await WatchLater.findOneAndUpdate(
-            { owner: req.user.id },
-            { $push: { list: filmId } },
-            { new: true },
-        );
-        newWatchLater.save((err) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).json({ message: 'something going wrong' });
-            }
-        });
-        res.status(200).json(newWatchLater);
-    } catch (err) {
-        console.log(err);
-        return res.status(400).json({ message: 'Something going wrong' });
-    }
-});
+WatchLaterRouter.put('/add/:id', userExists, WatchLaterController.addByUserId);
 
 // /api/watch-later/    remove film by filmId
-router.put('/remove/:id', userExists, jsonParser, async (req, res) => {
-    if (!req.body) return res.status(400).json({ message: 'Film does not exists' });
-    const filmId = req.body.filmId;
-    try {
-        const newWatchLater = await WatchLater.findOneAndUpdate(
-            { owner: req.user.id },
-            { $pull: { list: filmId } },
-            { new: true },
-        );
-        newWatchLater.save((err) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).json({ message: 'something going wrong' });
-            }
-        });
-        res.status(200).json(newWatchLater);
-    } catch (err) {
-        console.log(err);
-        return res.status(400).json({ message: 'Something going wrong' });
-    }
-});
+WatchLaterRouter.put('/remove/:id', userExists, WatchLaterController.removeByUserId);
 
-module.exports = router;
+export default WatchLaterRouter;

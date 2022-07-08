@@ -15,7 +15,7 @@ export const useScreen = (userWidth: number) => {
     };
 
     switch (true) {
-        case width <= 600:
+        case width <= 1000:
             answer.isMobile = true;
             break;
         default:

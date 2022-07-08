@@ -46,14 +46,14 @@ body {
 
 .mobile {
     top: 80px;
-    overflow: hidden;
-    display: flex;
-    flex-flow: column nowrap;
+    justify-content: center;
     align-items: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
     .main {
         padding: 0;
+        flex-direction: column;
+        justify-content: center;
     }
 }

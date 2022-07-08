@@ -1,19 +1,23 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const CONFIG = require('./config');
+import express from 'express';
+import mongoose from 'mongoose';
+import * as CONFIG from './config.js';
+import bodyParser from 'body-parser';
 const app = express();
-const bodyParser = require('body-parser');
+
+import AuthRouter from './routes/auth.routes.js';
+import WatchLaterRouter from './routes/watchLater.routes.js';
+import FavouritesRouter from './routes/favourites.routes.js';
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use('/api/auth', require('./routes/auth.routes'));
-app.use('/api/users', require('./routes/users.routes'));
-app.use('/api/favourites', require('./routes/favourites.routes'));
-app.use('/api/watch-later', require('./routes/watchLater.routes'));
+app.use('/api/auth', AuthRouter);
+app.use('/api/favourites', FavouritesRouter);
+app.use('/api/watch-later', WatchLaterRouter);
 
 (async () => {
     try {
-        await mongoose.connect(CONFIG.dbURL, { useUnifiedTopology: true, useNewUrlParser: true });
+        await mongoose.connect(CONFIG.dbURL);
         app.listen(CONFIG.PORT, () =>
             console.log(`Server is listening. http://localhost:${CONFIG.PORT}`),
         );

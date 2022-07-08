@@ -1,11 +1,11 @@
-const { Schema, model, Types } = require('mongoose');
+import mongoose from 'mongoose';
 
-const schema = new Schema(
+const schema = new mongoose.Schema(
     {
         list: { type: [Number], required: true },
-        owner: { type: Types.ObjectId, required: true, unique: true },
+        owner: { type: mongoose.Types.ObjectId, required: true, unique: true },
     },
     { versionKey: false },
 );
 
-module.exports = model('Favourites', schema);
+export default mongoose.model('Favourites', schema);

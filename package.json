@@ -6,7 +6,7 @@
     "server": "npm run server --prefix server",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    " ": "concurrently \"npm install --prefix client \" \"npm install --prefix server \""
+    "install:devs": "concurrently \"npm install --prefix client \" \"npm install --prefix server \""
   },
   "keywords": [
     "mern",

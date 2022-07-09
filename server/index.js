@@ -2,13 +2,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import * as CONFIG from './config.js';
 import bodyParser from 'body-parser';
+
 const app = express();
 
 import AuthRouter from './routes/auth.routes.js';
 import WatchLaterRouter from './routes/watchLater.routes.js';
 import FavouritesRouter from './routes/favourites.routes.js';
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use('/api/auth', AuthRouter);

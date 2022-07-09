@@ -9,7 +9,7 @@
     z-index: 10;
 }
 
-.auth__content {
+.auth-popup__content {
     background: rgba(1, 13, 30, 0.85);
     width: 400px;
     display: flex;
@@ -19,7 +19,7 @@
     gap: 20px;
     font-family: Roboto, sans-serif;
 
-    .auth-header {
+    .auth-popup__top {
         height: 20%;
         display: flex;
         color: white;
@@ -79,6 +79,13 @@
         justify-content: space-between;
         gap: 5px;
 
+        .auth-popup__error {
+            text-align: center;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
+            color: #f65d5d;
+        }
+
         label {
             color: white;
             font-size: 16px;
@@ -121,12 +128,13 @@
                 background: none;
             }
         }
-        .buttons {
+
+        .form-buttons {
             display: flex;
             justify-content: space-between;
             background: none;
 
-            .form-button {
+            .form-buttons__enter {
                 width: 100px;
                 height: 40px;
                 padding: 5px;
@@ -140,7 +148,7 @@
                 user-select: none;
             }
 
-            .auth-btn {
+            .form-buttons__action-switcher {
                 width: 200px;
                 word-break: break-word;
                 font-size: 14px;
